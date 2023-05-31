@@ -1,6 +1,11 @@
 # Quản lý kho hàng máy tính
 Đồ án môn Lập trình hướng đối tượng sử dụng Java Swing + MySQL
+### Thành viên trong nhóm
 
+| STT |    MSSV    | Họ và tên         | Điểm  |
+| :-: | :--------: | :---------------: | :---: | 
+|  1  | 3121410422 | Trần Nhật Sinh    | 10    | 
+|  2  | 3121410069 | Hoàng Gia Bảo     | 10    |
 ### Giao diện 
 ![Alt text](./img/login.png)
 ![Alt text](./img/sanpham.png)
