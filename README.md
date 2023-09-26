@@ -18,8 +18,8 @@
 3. Sử dụng netbeans để chạy source code.
 
 ### Tài khoản ADMIN
-Tài khoản: admin
-Mật khẩu: 123456
+- Tài khoản: admin
+- Mật khẩu: 123456
 
 ### Giao diện 
 ![Alt text](./img/login.png)
