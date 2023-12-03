@@ -9,16 +9,13 @@ import java.util.Objects;
 public class ChiTietPhieu {
 
     private String maPhieu;
-    private String maMay;
+    private String maSP;
     private int soLuong;
     private double donGia;
 
-    public ChiTietPhieu() {
-    }
-
-    public ChiTietPhieu(String maPhieu, String maMay, int soLuong, double donGia) {
+    public ChiTietPhieu(String maPhieu, String maSP, int soLuong, double donGia) {
         this.maPhieu = maPhieu;
-        this.maMay = maMay;
+        this.maSP = maSP;
         this.soLuong = soLuong;
         this.donGia = donGia;
     }
@@ -31,12 +28,12 @@ public class ChiTietPhieu {
         this.maPhieu = maPhieu;
     }
 
-    public String getMaMay() {
-        return maMay;
+    public String getMaSP() {
+        return maSP;
     }
 
-    public void setMaMay(String maMay) {
-        this.maMay = maMay;
+    public void setMaSP(String maSP) {
+        this.maSP = maSP;
     }
 
     public int getSoLuong() {
@@ -57,7 +54,11 @@ public class ChiTietPhieu {
 
     @Override
     public int hashCode() {
-        int hash = 3;
+        int hash = 7;
+        hash = 17 * hash + Objects.hashCode(this.maPhieu);
+        hash = 17 * hash + Objects.hashCode(this.maSP);
+        hash = 17 * hash + this.soLuong;
+        hash = 17 * hash + (int) (Double.doubleToLongBits(this.donGia) ^ (Double.doubleToLongBits(this.donGia) >>> 32));
         return hash;
     }
 
@@ -82,13 +83,12 @@ public class ChiTietPhieu {
         if (!Objects.equals(this.maPhieu, other.maPhieu)) {
             return false;
         }
-        return Objects.equals(this.maMay, other.maMay);
+        return Objects.equals(this.maSP, other.maSP);
     }
 
     @Override
     public String toString() {
-        return "ChiTietPhieu{" + "maPhieu=" + maPhieu + ", maMay=" + maMay + ", soLuong=" + soLuong + ", donGia=" + donGia + '}';
+        return "ChiTietPhieu{" + "maPhieu=" + maPhieu + ", maSP=" + maSP + ", soLuong=" + soLuong + ", donGia=" + donGia + '}';
     }
-
     
 }

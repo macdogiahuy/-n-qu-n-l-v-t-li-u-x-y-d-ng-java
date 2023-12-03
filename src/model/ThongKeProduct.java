@@ -11,35 +11,35 @@ import java.util.Objects;
  * @author sinh
  */
 public class ThongKeProduct {
-    private String maMay;
-    private String tenMay;
+    private String maSP;
+    private String tenSP;
     private int slNhap;
     private int slXuat;
 
     public ThongKeProduct() {
     }
 
-    public ThongKeProduct(String maMay, String tenMay, int slNhap, int slXuat) {
-        this.maMay = maMay;
-        this.tenMay = tenMay;
+    public ThongKeProduct(String maSP, String tenSP, int slNhap, int slXuat) {
+        this.maSP = maSP;
+        this.tenSP = tenSP;
         this.slNhap = slNhap;
         this.slXuat = slXuat;
     }
 
     public String getMaMay() {
-        return maMay;
+        return maSP;
     }
 
-    public void setMaMay(String maMay) {
-        this.maMay = maMay;
+    public void setMaMay(String maSP) {
+        this.maSP = maSP;
     }
 
-    public String getTenMay() {
-        return tenMay;
+    public String getTenSP() {
+        return tenSP;
     }
 
-    public void setTenMay(String tenMay) {
-        this.tenMay = tenMay;
+    public void setTenMay(String tenSP) {
+        this.tenSP = tenSP;
     }
 
     public int getSlNhap() {
@@ -61,8 +61,8 @@ public class ThongKeProduct {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 53 * hash + Objects.hashCode(this.maMay);
-        hash = 53 * hash + Objects.hashCode(this.tenMay);
+        hash = 53 * hash + Objects.hashCode(this.maSP);
+        hash = 53 * hash + Objects.hashCode(this.tenSP);
         hash = 53 * hash + this.slNhap;
         hash = 53 * hash + this.slXuat;
         return hash;
@@ -86,15 +86,15 @@ public class ThongKeProduct {
         if (this.slXuat != other.slXuat) {
             return false;
         }
-        if (!Objects.equals(this.maMay, other.maMay)) {
+        if (!Objects.equals(this.maSP, other.maSP)) {
             return false;
         }
-        return Objects.equals(this.tenMay, other.tenMay);
+        return Objects.equals(this.tenSP, other.tenSP);
     }
 
     @Override
     public String toString() {
-        return "ThongKeProduct{" + "maMay=" + maMay + ", tenMay=" + tenMay + ", slNhap=" + slNhap + ", slXuat=" + slXuat + '}';
+        return "ThongKeProduct{" + "maMay=" + maSP + ", tenMay=" + tenSP + ", slNhap=" + slNhap + ", slXuat=" + slXuat + '}';
     }
     
     

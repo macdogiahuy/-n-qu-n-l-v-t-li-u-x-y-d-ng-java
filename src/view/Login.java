@@ -77,10 +77,10 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(13, 39, 51));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Green"));
+        jPanel2.setBackground(new java.awt.Color(51, 102, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Cantarell", 1, 65)); // NOI18N
@@ -94,7 +94,6 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 580));
 
         jLabel4.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Username");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 150, 110, 40));
 
@@ -104,10 +103,9 @@ public class Login extends javax.swing.JFrame {
         jLabel6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 230, 260, -1));
 
-        loginUser.setBackground(new java.awt.Color(13, 39, 51));
         loginUser.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
         loginUser.setForeground(new java.awt.Color(255, 255, 255));
-        loginUser.setBorder(null);
+        loginUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         loginUser.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 loginUserMouseEntered(evt);
@@ -128,9 +126,8 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(loginUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, 260, 30));
 
-        passwordUser.setBackground(new java.awt.Color(13, 39, 51));
         passwordUser.setForeground(new java.awt.Color(255, 255, 255));
-        passwordUser.setBorder(null);
+        passwordUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         passwordUser.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 passwordUserKeyPressed(evt);
@@ -138,7 +135,7 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(passwordUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 290, 260, 30));
 
-        JPaneLogin.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Green"));
+        JPaneLogin.setBackground(new java.awt.Color(102, 153, 255));
         JPaneLogin.setToolTipText("");
         JPaneLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         JPaneLogin.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -187,12 +184,10 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(JPaneLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 360, 270, 40));
 
         jLabel8.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Password");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, 130, 40));
 
         jLabel7.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Quên mật khẩu ?");
         jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
