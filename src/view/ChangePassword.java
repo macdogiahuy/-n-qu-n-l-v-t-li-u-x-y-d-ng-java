@@ -90,7 +90,7 @@ public class ChangePassword extends javax.swing.JDialog {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel1.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Green"));
+        jPanel1.setBackground(new java.awt.Color(0, 153, 51));
 
         jLabel1.setFont(new java.awt.Font("SF Pro Display", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));

@@ -212,7 +212,7 @@ public class UpdatePhieuXuat extends javax.swing.JDialog {
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 580, 350));
 
-        btnNhapHang.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Green"));
+        btnNhapHang.setBackground(new java.awt.Color(0, 153, 51));
         btnNhapHang.setFont(new java.awt.Font("SF Pro Display", 0, 15)); // NOI18N
         btnNhapHang.setForeground(new java.awt.Color(255, 255, 255));
         btnNhapHang.setText("Lưu thay đổi");
@@ -269,7 +269,7 @@ public class UpdatePhieuXuat extends javax.swing.JDialog {
                 {null, null, null, null}
             },
             new String [] {
-                "Mã máy", "Tên máy", "Số lượng", "Đơn giá"
+                "Mã sản phẩm", "Tên sản phẩm", "Số lượng", "Đơn giá"
             }
         ));
         jScrollPane2.setViewportView(tblSanPham);
@@ -281,7 +281,7 @@ public class UpdatePhieuXuat extends javax.swing.JDialog {
         txtSoLuong.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtSoLuong.setText("1");
 
-        addProduct.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Green"));
+        addProduct.setBackground(new java.awt.Color(0, 153, 51));
         addProduct.setFont(new java.awt.Font("SF Pro Display", 0, 15)); // NOI18N
         addProduct.setForeground(new java.awt.Color(255, 255, 255));
         addProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_add_25px_5.png"))); // NOI18N

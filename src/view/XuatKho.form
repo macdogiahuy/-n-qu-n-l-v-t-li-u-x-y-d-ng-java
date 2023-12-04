@@ -33,7 +33,7 @@
     <Container class="javax.swing.JPanel" name="NavbarMenu">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="69" green="a8" id="Actions.Green" palette="3" red="59" type="palette"/>
+          <Color blue="33" green="99" red="0" type="rgb"/>
         </Property>
       </Properties>
       <Constraints>

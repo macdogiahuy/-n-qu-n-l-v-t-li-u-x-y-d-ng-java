@@ -80,7 +80,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(51, 102, 255));
+        jPanel2.setBackground(new java.awt.Color(0, 153, 51));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Cantarell", 1, 65)); // NOI18N
@@ -135,7 +135,7 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(passwordUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 290, 260, 30));
 
-        JPaneLogin.setBackground(new java.awt.Color(102, 153, 255));
+        JPaneLogin.setBackground(new java.awt.Color(0, 153, 51));
         JPaneLogin.setToolTipText("");
         JPaneLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         JPaneLogin.addMouseListener(new java.awt.event.MouseAdapter() {

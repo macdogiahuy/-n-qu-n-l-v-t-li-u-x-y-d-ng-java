@@ -210,7 +210,7 @@ public class XuatHangForm extends javax.swing.JInternalFrame {
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 580, 450));
 
-        btnNhapHang.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Green"));
+        btnNhapHang.setBackground(new java.awt.Color(0, 153, 51));
         btnNhapHang.setForeground(new java.awt.Color(255, 255, 255));
         btnNhapHang.setText("Xuất hàng");
         btnNhapHang.setBorder(null);
@@ -273,7 +273,7 @@ public class XuatHangForm extends javax.swing.JInternalFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Mã máy", "Tên máy", "Số lượng", "Đơn giá"
+                "Mã sản phẩm", "Tên sản phẩm", "Số lượng", "Đơn giá"
             }
         ));
         jScrollPane2.setViewportView(tblSanPham);
@@ -288,7 +288,7 @@ public class XuatHangForm extends javax.swing.JInternalFrame {
             }
         });
 
-        addProduct.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Green"));
+        addProduct.setBackground(new java.awt.Color(0, 153, 51));
         addProduct.setForeground(new java.awt.Color(255, 255, 255));
         addProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_add_25px_5.png"))); // NOI18N
         addProduct.setText("Thêm");
