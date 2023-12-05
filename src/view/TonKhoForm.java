@@ -6,7 +6,7 @@ package view;
 
 import controller.SearchProduct;
 import dao.LaptopDAO;
-import dao.MayTinhDAO;
+import dao.SanPhamDAO;
 import dao.PCDAO;
 import java.awt.Desktop;
 import java.io.File;
@@ -69,7 +69,7 @@ public class TonKhoForm extends javax.swing.JInternalFrame {
 
     public void loadDataToTable() {
         try {
-            MayTinhDAO mtdao = new MayTinhDAO();
+            SanPhamDAO mtdao = new SanPhamDAO();
             ArrayList<MayTinh> armt = mtdao.selectAllE();
             tblModel.setRowCount(0);
             for (MayTinh i : armt) {
@@ -386,14 +386,14 @@ public class TonKhoForm extends javax.swing.JInternalFrame {
         int luaChon = JOptionPane.showConfirmDialog(this, "Bạn có muốn xoá sản phẩm này?", "Xoá sản phẩm",
                 JOptionPane.YES_NO_OPTION);
         if (luaChon == JOptionPane.YES_OPTION) {
-            MayTinhDAO.getInstance().delete(getMayTinhSelect());
+            SanPhamDAO.getInstance().delete(getMayTinhSelect());
             table_acc.removeRow(i_row);
         }
     }
 
     public MayTinh getMayTinhSelect() {
         int i_row = tblSanPham.getSelectedRow();
-        MayTinh acc = MayTinhDAO.getInstance().selectAll().get(i_row);
+        MayTinh acc = SanPhamDAO.getInstance().selectAll().get(i_row);
         return acc;
     }
 

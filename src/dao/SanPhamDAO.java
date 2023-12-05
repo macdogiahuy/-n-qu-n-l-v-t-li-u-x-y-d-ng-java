@@ -13,54 +13,48 @@ import database.JDBCUtil;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Account;
-import model.Laptop;
-import model.MayTinh;
+import model.SanPham;
 
-public class MayTinhDAO implements DAOInterface<MayTinh> {
+public class SanPhamDAO implements DAOInterface<SanPham> {
 
-    public static MayTinhDAO getInstance() {
-        return new MayTinhDAO();
+    public static SanPhamDAO getInstance() {
+        return new SanPhamDAO();
     }
 
     @Override
-    public int insert(MayTinh t) {
+    public int insert(SanPham t) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public int update(MayTinh t) {
+    public int update(SanPham t) {
         int ketqua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "UPDATE MayTinh SET tenMay = ?,soLuong=?,gia=?,tenCpu=?,ram=?,xuatXu=?,cardManHinh=?,rom=?,trangThai=? WHERE maMay=?";
+            String sql = "UPDATE sanpham SET tenSP = ?,soLuong=?,gia=?,xuatXu=?,trangThai=? WHERE maSP=?";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, t.getTenMay());
+            pst.setString(1, t.getTenSP());
             pst.setInt(2, t.getSoLuong());
             pst.setDouble(3, t.getGia());
-            pst.setString(4, t.getTenCpu());
-            pst.setString(5, t.getRam());
             pst.setString(6, t.getXuatXu());
-            pst.setString(7, t.getCardManHinh());
-            pst.setString(8, t.getRom());
             pst.setInt(9, t.getTrangThai());
-            pst.setString(10, t.getMaMay());
+            pst.setString(10, t.getMaSP());
             ketqua = pst.executeUpdate(sql);
             JDBCUtil.closeConnection(con);
         } catch (SQLException ex) {
-            Logger.getLogger(MayTinhDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return ketqua;
     }
 
     @Override
-    public int delete(MayTinh t) {
+    public int delete(SanPham t) {
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "DELETE FROM MayTinh WHERE maMay=? ";
+            String sql = "DELETE FROM sanpham WHERE maSP=? ";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, t.getMaMay());
+            pst.setString(1, t.getMaSP());
             ketQua = pst.executeUpdate();
 
             JDBCUtil.closeConnection(con);
@@ -72,11 +66,11 @@ public class MayTinhDAO implements DAOInterface<MayTinh> {
     }
 
     @Override
-    public ArrayList<MayTinh> selectAll() {
-        ArrayList<MayTinh> ketQua = new ArrayList<MayTinh>();
+    public ArrayList<SanPham> selectAll() {
+        ArrayList<SanPham> ketQua = new ArrayList<SanPham>();
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT maMay,tenMay,soLuong,gia,tenCpu,ram,xuatXu,cardManHinh,rom,trangThai FROM MayTinh";
+            String sql = "SELECT maSP,tenSP,soLuong,gia,xuatXu,trangThai FROM sanpham";
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
