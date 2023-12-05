@@ -6,7 +6,7 @@ package view;
 
 import controller.SearchProduct;
 import dao.LaptopDAO;
-import dao.MayTinhDAO;
+import dao.SanPhamDAO;
 import dao.PCDAO;
 import java.awt.Desktop;
 import java.io.BufferedInputStream;
@@ -83,7 +83,7 @@ public class ProductForm extends javax.swing.JInternalFrame {
 
     public void loadDataToTable() {
         try {
-            MayTinhDAO mtdao = new MayTinhDAO();
+            SanPhamDAO mtdao = new SanPhamDAO();
             ArrayList<MayTinh> armt = mtdao.selectAll();
             tblModel.setRowCount(0);
             for (MayTinh i : armt) {
@@ -526,14 +526,14 @@ public class ProductForm extends javax.swing.JInternalFrame {
                 JOptionPane.YES_NO_OPTION);
         if (luaChon == JOptionPane.YES_OPTION) {
             MayTinh remove = getMayTinhSelect();
-            MayTinhDAO.getInstance().deleteTrangThai(remove.getMaMay());
+            SanPhamDAO.getInstance().deleteTrangThai(remove.getMaMay());
         }
         loadDataToTable();
     }
 
     public MayTinh getMayTinhSelect() {
         int i_row = tblSanPham.getSelectedRow();
-        MayTinh acc = MayTinhDAO.getInstance().selectById(tblModel.getValueAt(i_row, 0).toString());
+        MayTinh acc = SanPhamDAO.getInstance().selectById(tblModel.getValueAt(i_row, 0).toString());
         return acc;
     }
 

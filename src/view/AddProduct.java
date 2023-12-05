@@ -5,7 +5,7 @@
 package view;
 
 import dao.LaptopDAO;
-import dao.MayTinhDAO;
+import dao.SanPhamDAO;
 import dao.PCDAO;
 import java.awt.CardLayout;
 import java.util.ArrayList;
@@ -387,7 +387,7 @@ public class AddProduct extends javax.swing.JDialog {
      * @param args the command line arguments
      */
     public String createIdPC() {
-        ArrayList<MayTinh> mtAll = MayTinhDAO.getInstance().selectAll();
+        ArrayList<MayTinh> mtAll = SanPhamDAO.getInstance().selectAll();
         ArrayList<MayTinh> pcAll = new ArrayList<MayTinh>();
         for (MayTinh mayTinh : mtAll) {
             if (mayTinh.getMaMay().contains("PC")) {
@@ -413,7 +413,7 @@ public class AddProduct extends javax.swing.JDialog {
     }
 
     public String createIdLT() {
-        ArrayList<MayTinh> mtAll = MayTinhDAO.getInstance().selectAll();
+        ArrayList<MayTinh> mtAll = SanPhamDAO.getInstance().selectAll();
         ArrayList<MayTinh> lpAll = new ArrayList<MayTinh>();
         for (MayTinh mayTinh : mtAll) {
             if (mayTinh.getMaMay().contains("LP")) {

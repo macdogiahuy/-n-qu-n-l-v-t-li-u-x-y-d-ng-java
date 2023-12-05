@@ -10,14 +10,14 @@ import java.util.Objects;
  *
  * @author macdo
  */
-public class GachNgoi extends SanPham{
+public class PhanLoai extends SanPham{
     private String LoaiGach;
     private String LoaiNgoi;
     private String CachAm;
     private String TrangTri;
     private String NoiThat;
 
-    public GachNgoi(String LoaiGach, String LoaiNgoi, String CachAm, String TrangTri, String NoiThat, String maSP, String tenSP, int soLuong, double gia, String xuatXu, int trangThai, String phanloai) {
+    public PhanLoai(String LoaiGach, String LoaiNgoi, String CachAm, String TrangTri, String NoiThat, String maSP, String tenSP, int soLuong, double gia, String xuatXu, int trangThai, String phanloai) {
         super(maSP, tenSP, soLuong, gia, xuatXu, trangThai, phanloai);
         this.LoaiGach = LoaiGach;
         this.LoaiNgoi = LoaiNgoi;
@@ -88,7 +88,7 @@ public class GachNgoi extends SanPham{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final GachNgoi other = (GachNgoi) obj;
+        final PhanLoai other = (PhanLoai) obj;
         if (!Objects.equals(this.LoaiGach, other.LoaiGach)) {
             return false;
         }

@@ -3,40 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/CTPhieuNhap.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/UpdateProduct.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/XuatHangForm.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/AccountForm.java</file>
+            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/dao/PhieuNhapDAO.java</file>
             <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/AddProduct.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/RecoverPassword.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/AddAccount.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/UpdatePhieuXuat.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/CTThongKeAcc.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/UpdateAccount.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/NhaCungCapForm.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/QuanLiKho.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/ChangePassword.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/dao/ChiTietPhieuNhapDAO.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/CTPhieuXuat.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/database/JDBCUtil.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/Admin.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/UpdatePhieuNhap.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/PhieuNhapForm.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/UpdateNhaCungCap.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/DetailProduct.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/CTThongKe.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/NhapHangForm.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/model/ChiTietPhieu.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/XuatKho.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/model/GachNgoi.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/PhieuXuatForm.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/NhapKho.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/ThongKeForm.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/TonKhoForm.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/AddNhaCungCap.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/ProductForm.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/model/Account.java</file>
-            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/view/Login.java</file>
+            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/dao/SanPhamDAO.java</file>
+            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/dao/PhieuXuatDAO.java</file>
+            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/dao/DAOInterface.java</file>
+            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/model/PhanLoai.java</file>
+            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/src/model/SanPham.java</file>
+            <file>file:/C:/Users/Admin/OneDrive%20-%20MSFT/Documents/NetBeansProjects/Manager_Masterial_Building_v2/database/quanlimaytinh.sql</file>
         </group>
     </open-files>
 </project-private>

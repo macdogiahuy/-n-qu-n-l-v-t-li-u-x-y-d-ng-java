@@ -7,7 +7,7 @@ package view;
 import controller.SearchProduct;
 import controller.WritePDF;
 import dao.ChiTietPhieuXuatDAO;
-import dao.MayTinhDAO;
+import dao.SanPhamDAO;
 import dao.PhieuNhapDAO;
 import dao.PhieuXuatDAO;
 import java.io.BufferedInputStream;
@@ -53,7 +53,7 @@ public class XuatHangForm extends javax.swing.JInternalFrame {
         BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
         ui.setNorthPane(null);
         initComponents();
-        allProduct = MayTinhDAO.getInstance().selectAllExist();
+        allProduct = SanPhamDAO.getInstance().selectAllExist();
         // Định dạng độ rộng
         initTable();
         loadDataToTableProduct(allProduct);
@@ -401,7 +401,7 @@ public class XuatHangForm extends javax.swing.JInternalFrame {
                 PhieuXuat pn = new PhieuXuat(MaPhieu, sqlTimestamp, txtNguoiTao.getText(), CTPhieu, tinhTongTien());
                 try {
                     PhieuXuatDAO.getInstance().insert(pn);
-                    MayTinhDAO mtdao = MayTinhDAO.getInstance();
+                    SanPhamDAO mtdao = SanPhamDAO.getInstance();
                     for (var i : CTPhieu) {
                         ChiTietPhieuXuatDAO.getInstance().insert(i);
                         mtdao.updateSoLuong(i.getMaMay(), mtdao.selectById(i.getMaMay()).getSoLuong() - i.getSoLuong());
@@ -413,7 +413,7 @@ public class XuatHangForm extends javax.swing.JInternalFrame {
                         WritePDF writepdf = new WritePDF();
                         writepdf.writePhieuXuat(MaPhieu);
                     }
-                    allProduct = MayTinhDAO.getInstance().selectAllExist();
+                    allProduct = SanPhamDAO.getInstance().selectAllExist();
                     loadDataToTableProduct(allProduct);
                     DefaultTableModel l = (DefaultTableModel) tblNhapHang.getModel();
                     l.setRowCount(0);
@@ -561,7 +561,7 @@ public class XuatHangForm extends javax.swing.JInternalFrame {
                     String tenSanPham = excelRow.getCell(2).getStringCellValue();
                     int soLuong = (int) (excelRow.getCell(3).getNumericCellValue());
                 
-                    double donGia = MayTinhDAO.getInstance().selectById(maSanPham).getGia();
+                    double donGia = SanPhamDAO.getInstance().selectById(maSanPham).getGia();
                     ChiTietPhieu ctpnew = new ChiTietPhieu(maPhieu, maSanPham, soLuong, donGia);
                     CTPhieu.add(ctpnew);
                 }
