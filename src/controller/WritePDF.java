@@ -39,7 +39,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.ChiTietPhieu;
-import model.MayTinh;
+import model.SanPham;
 import model.PhieuNhap;
 import model.PhieuXuat;
 
@@ -170,12 +170,12 @@ public class WritePDF {
 
             //Truyen thong tin tung chi tiet vao table
             for (ChiTietPhieu ctpn : ChiTietPhieuNhapDAO.getInstance().selectAll(mapn)) {
-                MayTinh mt = SanPhamDAO.getInstance().selectById(ctpn.getMaMay());
-                pdfTable.addCell(new PdfPCell(new Phrase(ctpn.getMaMay(), fontData)));
-                pdfTable.addCell(new PdfPCell(new Phrase(mt.getTenMay(), fontData)));
-                pdfTable.addCell(new PdfPCell(new Phrase(formatter.format(mt.getGia()) + "đ", fontData)));
+                SanPham sp = SanPhamDAO.getInstance().selectById(ctpn.getMaSP());
+                pdfTable.addCell(new PdfPCell(new Phrase(ctpn.getMaSP(), fontData)));
+                pdfTable.addCell(new PdfPCell(new Phrase(sp.getTenSP(), fontData)));
+                pdfTable.addCell(new PdfPCell(new Phrase(formatter.format(sp.getGia()) + "đ", fontData)));
                 pdfTable.addCell(new PdfPCell(new Phrase(String.valueOf(ctpn.getSoLuong()), fontData)));
-                pdfTable.addCell(new PdfPCell(new Phrase(formatter.format(ctpn.getSoLuong() * mt.getGia()) + "đ", fontData)));
+                pdfTable.addCell(new PdfPCell(new Phrase(formatter.format(ctpn.getSoLuong() * sp.getGia()) + "đ", fontData)));
             }
 
             document.add(pdfTable);
@@ -250,12 +250,12 @@ public class WritePDF {
 
             //Truyen thong tin tung chi tiet vao table
             for (ChiTietPhieu ctpn : ChiTietPhieuXuatDAO.getInstance().selectAll(mapn)) {
-                MayTinh mt = SanPhamDAO.getInstance().selectById(ctpn.getMaMay());
-                pdfTable.addCell(new PdfPCell(new Phrase(ctpn.getMaMay(), fontData)));
-                pdfTable.addCell(new PdfPCell(new Phrase(mt.getTenMay(), fontData)));
-                pdfTable.addCell(new PdfPCell(new Phrase(formatter.format(mt.getGia()) + "đ", fontData)));
+                SanPham sp = SanPhamDAO.getInstance().selectById(ctpn.getMaSP());
+                pdfTable.addCell(new PdfPCell(new Phrase(ctpn.getMaSP(), fontData)));
+                pdfTable.addCell(new PdfPCell(new Phrase(sp.getTenSP(), fontData)));
+                pdfTable.addCell(new PdfPCell(new Phrase(formatter.format(sp.getGia()) + "đ", fontData)));
                 pdfTable.addCell(new PdfPCell(new Phrase(String.valueOf(ctpn.getSoLuong()), fontData)));
-                pdfTable.addCell(new PdfPCell(new Phrase(formatter.format(ctpn.getSoLuong() * mt.getGia()) + "đ", fontData)));
+                pdfTable.addCell(new PdfPCell(new Phrase(formatter.format(ctpn.getSoLuong() * sp.getGia()) + "đ", fontData)));
             }
             document.add(pdfTable);
             document.add(Chunk.NEWLINE);
