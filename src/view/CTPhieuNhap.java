@@ -67,8 +67,8 @@ public class CTPhieuNhap extends javax.swing.JDialog {
             for (int i = 0; i < CTPhieu.size(); i++) {
                 tblCTPhieumd.addRow(new Object[]{
                     i + 1, 
-                    CTPhieu.get(i).getMaMay(),
-                    SanPhamDAO.getInstance().selectById(CTPhieu.get(i).getMaMay()).getTenMay(),
+                    CTPhieu.get(i).getMaSP(),
+                    SanPhamDAO.getInstance().selectById(CTPhieu.get(i).getMaSP()).getTenSP(),
                     CTPhieu.get(i).getSoLuong(),
                     parent.getFormatter().format(CTPhieu.get(i).getDonGia()) + "đ",
                     parent.getFormatter().format(CTPhieu.get(i).getDonGia() * CTPhieu.get(i).getSoLuong()) + "đ"

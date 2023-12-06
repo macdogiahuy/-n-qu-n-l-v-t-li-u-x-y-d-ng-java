@@ -4,16 +4,15 @@
  */
 package view;
 
-import dao.LaptopDAO;
+
 import dao.SanPhamDAO;
-import dao.PCDAO;
+
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import model.Laptop;
-import model.MayTinh;
-import model.PC;
+import model.SanPham;
+
 
 /**
  *
@@ -300,19 +299,14 @@ public class AddProduct extends javax.swing.JDialog {
 
     private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
         // TODO add your handling code here:
-        String maMay = txtMaSanPham.getText();
-        String tenMay = txtTenSanPham.getText();
+        String maSP = txtMaSanPham.getText();
+        String tenSP = txtTenSanPham.getText();
         double dongia = 0;
-        double kichthuocman = 0;
         try {
             dongia = Double.parseDouble(txtDonGia.getText());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đơn giá ở dạng số !");
         }
-        String cpu = txtCPU.getText();
-        String ram = txtRAM.getText();
-        String rom = txtROM.getText();
-        String gpu = txtGPU.getText();
         String xuatxu = txtXuatXu.getText();
         int trangThai = 1;
         if (cbxloaisp.getSelectedItem().equals("Laptop")) {
