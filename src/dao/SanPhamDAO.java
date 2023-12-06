@@ -13,6 +13,8 @@ import database.JDBCUtil;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Account;
+import model.PhanLoai;
 import model.SanPham;
 
 public class SanPhamDAO implements DAOInterface<SanPham> {
@@ -23,7 +25,23 @@ public class SanPhamDAO implements DAOInterface<SanPham> {
 
     @Override
     public int insert(SanPham t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       int ketqua=0;
+       try {
+           Connection con = JDBCUtil.getConnection();
+           String sql = "INSERT SanPham (maSP,tenSP,soLuong,gia,phanLoai,xuatXu,trangThai) VALUES (?,?,?,?,?,?,?)";
+           PreparedStatement pst = con.prepareStatement(sql);
+           pst.setString(1,t.getMaSP());
+           pst.setString(2,t.getTenSP());
+           pst.setInt(3,t.getSoLuong());
+           pst.setDouble(4, t.getGia());
+           pst.setString(5, t.getPhanloai());
+            pst.setString(6, t.getXuatXu());
+             pst.setInt(7, t.getTrangThai());
+       } catch (Exception e) {
+            e.printStackTrace();
+       }
+       return ketqua;
+       
     }
 
     @Override
@@ -31,14 +49,15 @@ public class SanPhamDAO implements DAOInterface<SanPham> {
         int ketqua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "UPDATE sanpham SET tenSP = ?,soLuong=?,gia=?,xuatXu=?,trangThai=? WHERE maSP=?";
+            String sql = "UPDATE SanPham SET tenSP = ?,soLuong=?,gia=?,phanLoai=?,xuatXu=?,trangThai=? WHERE maSP=?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, t.getTenSP());
             pst.setInt(2, t.getSoLuong());
             pst.setDouble(3, t.getGia());
-            pst.setString(6, t.getXuatXu());
-            pst.setInt(9, t.getTrangThai());
-            pst.setString(10, t.getMaSP());
+            pst.setString(4, t.getPhanloai());
+            pst.setString(5, t.getXuatXu());
+            pst.setInt(6, t.getTrangThai());
+            pst.setString(7, t.getMaSP());
             ketqua = pst.executeUpdate(sql);
             JDBCUtil.closeConnection(con);
         } catch (SQLException ex) {
@@ -52,7 +71,7 @@ public class SanPhamDAO implements DAOInterface<SanPham> {
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "DELETE FROM sanpham WHERE maSP=? ";
+            String sql = "DELETE FROM MayTinh WHERE maSP=? ";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, t.getMaSP());
             ketQua = pst.executeUpdate();
@@ -70,22 +89,19 @@ public class SanPhamDAO implements DAOInterface<SanPham> {
         ArrayList<SanPham> ketQua = new ArrayList<SanPham>();
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT maSP,tenSP,soLuong,gia,xuatXu,trangThai FROM sanpham";
+            String sql = "SELECT maSP,tenSP,soLuong,gia,phanLoai,xuatXu,trangThai FROM SanPham";
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                String maMay = rs.getString("maMay");
-                String tenMay = rs.getString("tenMay");
+                String maSP = rs.getString("maSP");
+                String tenSP = rs.getString("tenSP");
                 int soLuong = rs.getInt("soLuong");
-                double gia = rs.getDouble("gia");
-                String tenCpu = rs.getString("tenCpu");
-                String ram = rs.getString("ram");
-                String xuatXu = rs.getString("xuatXu");
-                String cardManHinh = rs.getString("cardManHinh");
-                String rom = rs.getString("rom");
+                double gia = rs.getDouble("gia");             
+                String xuatXu = rs.getString("xuatXu");                     
                 int trangThai = rs.getInt("trangThai");
-                MayTinh mt = new MayTinh(maMay, tenMay, soLuong, gia, tenCpu, ram, xuatXu, cardManHinh, rom, trangThai);
-                ketQua.add(mt);
+                String phanLoai = rs.getString("phanLoai");
+                SanPham sp = new SanPham(maSP, tenSP, soLuong, gia, xuatXu, trangThai,phanLoai);
+                ketQua.add(sp);
             }
             JDBCUtil.closeConnection(con);
 
@@ -97,27 +113,24 @@ public class SanPhamDAO implements DAOInterface<SanPham> {
     }
 
     @Override
-    public MayTinh selectById(String t) {
-        MayTinh ketQua = null;
+    public SanPham selectById(String t) {
+        SanPham ketQua = null;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT maMay,tenMay,soLuong,gia,tenCpu,ram,xuatXu,cardManHinh,rom,trangThai FROM MayTinh WHERE maMay = ?";
+            String sql = "SELECT maSP,tenSP,soLuong,gia,phanLoai,xuatXu,trangThai FROM SanPham WHERE maSP = ?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, t);
 
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                String maMay = rs.getString("maMay");
-                String tenMay = rs.getString("tenMay");
+                String maSP = rs.getString("maSP");
+                String tenSP = rs.getString("tenSP");
                 int soLuong = rs.getInt("soLuong");
                 double gia = rs.getDouble("gia");
-                String tenCpu = rs.getString("tenCpu");
-                String ram = rs.getString("ram");
+                 String phanLoai = rs.getString("phanLoai");
                 String xuatXu = rs.getString("xuatXu");
-                String cardManHinh = rs.getString("cardManHinh");
-                String rom = rs.getString("rom");
                 int trangThai = rs.getInt("trangThai");
-                ketQua = new MayTinh(maMay, tenMay, soLuong, gia, tenCpu, ram, xuatXu, cardManHinh, rom, trangThai);
+                ketQua = new SanPham(maSP, tenSP, soLuong, gia, xuatXu, trangThai,phanLoai);
             }
             JDBCUtil.closeConnection(con);
         } catch (Exception e) {
@@ -132,7 +145,7 @@ public class SanPhamDAO implements DAOInterface<SanPham> {
         try {
             Connection con = JDBCUtil.getConnection();
             //String sql = "INSERT INTO MayTinh (maMay, tenMay, soLuong, tenCpu, ram, cardManHinh, gia, dungLuongPin, dungLuongPin, dungLuongPin, loaiMay, rom) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-            String sql = "UPDATE MayTinh SET soLuong=? WHERE maMay=? ";
+            String sql = "UPDATE SanPham SET soLuong=? WHERE maSP=? ";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, soluong);
             pst.setString(2, maMay);
@@ -149,7 +162,7 @@ public class SanPhamDAO implements DAOInterface<SanPham> {
         try {
             Connection con = JDBCUtil.getConnection();
             //String sql = "INSERT INTO MayTinh (maMay, tenMay, soLuong, tenCpu, ram, cardManHinh, gia, dungLuongPin, dungLuongPin, dungLuongPin, loaiMay, rom) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-            String sql = "UPDATE MayTinh SET trangThai=0 WHERE maMay=? ";
+            String sql = "UPDATE SanPham SET trangThai=0 WHERE maSP=? ";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, maMay);
             ketQua = pst.executeUpdate();
@@ -160,31 +173,28 @@ public class SanPhamDAO implements DAOInterface<SanPham> {
         return ketQua;
     }
 
-    public ArrayList<MayTinh> selectAllE() {
-        ArrayList<MayTinh> ketQua = new ArrayList<MayTinh>();
-        ArrayList<MayTinh> ketQuaTonKho = new ArrayList<>();
+    public ArrayList<SanPham> selectAllE() {
+        ArrayList<SanPham> ketQua = new ArrayList<SanPham>();
+        ArrayList<SanPham> ketQuaTonKho = new ArrayList<>();
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT maMay,tenMay,soLuong,gia,tenCpu,ram,xuatXu,cardManHinh,rom,trangThai FROM MayTinh";
+            String sql = "SELECT maSP,tenSP,soLuong,gia,phanLoai,xuatXu,trangThai FROM SanPham";
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                String maMay = rs.getString("maMay");
-                String tenMay = rs.getString("tenMay");
+                String maSP = rs.getString("maSP");
+                String tenSP = rs.getString("tenSP");
                 int soLuong = rs.getInt("soLuong");
                 double gia = rs.getDouble("gia");
-                String tenCpu = rs.getString("tenCpu");
-                String ram = rs.getString("ram");
+                 String phanLoai = rs.getString("phanLoai");
                 String xuatXu = rs.getString("xuatXu");
-                String cardManHinh = rs.getString("cardManHinh");
-                String rom = rs.getString("rom");
                 int trangThai = rs.getInt("trangThai");
-                MayTinh mt = new MayTinh(maMay, tenMay, soLuong, gia, tenCpu, ram, xuatXu, cardManHinh, rom, trangThai);
-                ketQua.add(mt);
+                SanPham sp = new SanPham(maSP, tenSP, soLuong, gia, xuatXu, trangThai,phanLoai);
+                ketQua.add(sp);
             }
-            for (MayTinh mayTinh : ketQua) {
-                if (mayTinh.getSoLuong() > 0) {
-                    ketQuaTonKho.add(mayTinh);
+            for (SanPham sanpham : ketQua) {
+                if (sanpham.getSoLuong() > 0) {
+                    ketQuaTonKho.add(sanpham);
                 }
             }
             JDBCUtil.closeConnection(con);
@@ -195,26 +205,23 @@ public class SanPhamDAO implements DAOInterface<SanPham> {
         return ketQuaTonKho;
     }
     
-        public ArrayList<MayTinh> selectAllExist() {
-        ArrayList<MayTinh> ketQua = new ArrayList<MayTinh>();
+        public ArrayList<SanPham> selectAllExist() {
+        ArrayList<SanPham> ketQua = new ArrayList<SanPham>();
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT maMay,tenMay,soLuong,gia,tenCpu,ram,xuatXu,cardManHinh,rom,trangThai FROM MayTinh WHERE trangThai = 1";
+            String sql = "SELECT maSP,tenSP,soLuong,gia,phanLoai,xuatXu,trangThai FROM SanPham WHERE trangThai = 1";
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                String maMay = rs.getString("maMay");
-                String tenMay = rs.getString("tenMay");
+                 String maSP = rs.getString("maSP");
+                String tenSP = rs.getString("tenSP");
                 int soLuong = rs.getInt("soLuong");
                 double gia = rs.getDouble("gia");
-                String tenCpu = rs.getString("tenCpu");
-                String ram = rs.getString("ram");
+                 String phanLoai = rs.getString("phanLoai");
                 String xuatXu = rs.getString("xuatXu");
-                String cardManHinh = rs.getString("cardManHinh");
-                String rom = rs.getString("rom");
                 int trangThai = rs.getInt("trangThai");
-                MayTinh mt = new MayTinh(maMay, tenMay, soLuong, gia, tenCpu, ram, xuatXu, cardManHinh, rom, trangThai);
-                ketQua.add(mt);
+                 SanPham sp = new SanPham(maSP, tenSP, soLuong, gia, xuatXu, trangThai,phanLoai);
+                ketQua.add(sp);
             }
             JDBCUtil.closeConnection(con);
         } catch (Exception e) {

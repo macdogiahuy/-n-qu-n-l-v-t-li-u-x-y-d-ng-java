@@ -170,7 +170,7 @@ public class AddProduct extends javax.swing.JDialog {
             }
         });
 
-        cbxloaisp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Loại gạch", "Loại ngói", "Cách âm", "Trang trí", "Nội thất", " " }));
+        cbxloaisp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Loại gạch", "Loại ngói", "Cách âm", "Trang trí", "Nội thất", "" }));
         cbxloaisp.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbxloaispItemStateChanged(evt);

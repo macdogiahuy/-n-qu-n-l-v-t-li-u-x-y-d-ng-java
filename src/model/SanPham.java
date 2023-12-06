@@ -25,6 +25,10 @@ public class SanPham {
         this.phanloai = phanloai;
     }
 
+    public SanPham() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public String getMaSP() {
         return maSP;
     }
@@ -127,4 +131,3 @@ public class SanPham {
         return Objects.equals(this.phanloai, other.phanloai);
     }   
 }
-
