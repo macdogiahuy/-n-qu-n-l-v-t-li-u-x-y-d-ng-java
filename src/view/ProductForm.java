@@ -74,8 +74,7 @@ public class ProductForm extends javax.swing.JInternalFrame {
         tblSanPham.getColumnModel().getColumn(0).setPreferredWidth(5);
         tblSanPham.getColumnModel().getColumn(1).setPreferredWidth(200);
         tblSanPham.getColumnModel().getColumn(2).setPreferredWidth(5);
-        tblSanPham.getColumnModel().getColumn(5).setPreferredWidth(5);
-        tblSanPham.getColumnModel().getColumn(6).setPreferredWidth(5);
+        tblSanPham.getColumnModel().getColumn(3).setPreferredWidth(5);
     }
 
     public void loadDataToTable() {
