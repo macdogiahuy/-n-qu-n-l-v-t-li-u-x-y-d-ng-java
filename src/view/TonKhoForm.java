@@ -5,9 +5,7 @@
 package view;
 
 import controller.SearchProduct;
-import dao.LaptopDAO;
 import dao.SanPhamDAO;
-import dao.PCDAO;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,9 +19,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
-import model.Laptop;
-import model.MayTinh;
-import model.PC;
+import model.SanPham;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -70,24 +66,19 @@ public class TonKhoForm extends javax.swing.JInternalFrame {
     public void loadDataToTable() {
         try {
             SanPhamDAO mtdao = new SanPhamDAO();
-            ArrayList<MayTinh> armt = mtdao.selectAllE();
+            ArrayList<SanPham> armt = mtdao.selectAllE();
             tblModel.setRowCount(0);
-            for (MayTinh i : armt) {
+            for (SanPham i : armt) {
                 if (i.getTrangThai() == 1) {
-                    String loaimay;
-                    if (LaptopDAO.getInstance().isLaptop(i.getMaMay()) == true) {
-                        loaimay = "Laptop";
-                    } else {
-                        loaimay = "PC/Case";
-                    }
                     tblModel.addRow(new Object[]{
-                        i.getMaMay(), i.getTenMay(), i.getSoLuong(), formatter.format(i.getGia()) + "đ", i.getTenCpu(), i.getRam(), i.getRom(), loaimay
+                        i.getMaSP(), i.getTenSP(), i.getSoLuong(), formatter.format(i.getGia()) + "đ"
                     });
                 }
             }
         } catch (Exception e) {
         }
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -345,7 +336,7 @@ public class TonKhoForm extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         String luaChon = jComboBoxLuaChon.getSelectedItem().toString();
         String content = jTextFieldSearch.getText();
-        ArrayList<MayTinh> result = searchFn(luaChon, content);
+        ArrayList<SanPham> result = searchFn(luaChon, content);
         loadDataToTableSearch(result);
     }//GEN-LAST:event_jTextFieldSearchKeyReleased
 
@@ -353,7 +344,7 @@ public class TonKhoForm extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         String luaChon = jComboBoxLuaChon.getSelectedItem().toString();
         String content = jTextFieldSearch.getText();
-        ArrayList<MayTinh> result = searchFn(luaChon, content);
+        ArrayList<SanPham> result = searchFn(luaChon, content);
         loadDataToTableSearch(result);
     }//GEN-LAST:event_jComboBoxLuaChonActionPerformed
 
@@ -362,21 +353,8 @@ public class TonKhoForm extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jTextFieldSearchKeyPressed
 
-    public boolean checklap() {
-        if (LaptopDAO.getInstance().isLaptop(getMayTinhSelect().getMaMay()) == true) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public Laptop getDetailLapTop() {
-        Laptop a = LaptopDAO.getInstance().selectById(getMayTinhSelect().getMaMay());
-        return a;
-    }
-
-    public PC getDetailPC() {
-        PC a = PCDAO.getInstance().selectById(getMayTinhSelect().getMaMay());
+    public SanPham getDetailLapTop() {
+        SanPham a = SanPhamDAO.getInstance().selectById(getMayTinhSelect().getMaSP());
         return a;
     }
 
@@ -391,25 +369,19 @@ public class TonKhoForm extends javax.swing.JInternalFrame {
         }
     }
 
-    public MayTinh getMayTinhSelect() {
+    public SanPham getMayTinhSelect() {
         int i_row = tblSanPham.getSelectedRow();
-        MayTinh acc = SanPhamDAO.getInstance().selectAll().get(i_row);
+        SanPham acc = SanPhamDAO.getInstance().selectAll().get(i_row);  
         return acc;
     }
 
-    public void loadDataToTableSearch(ArrayList<MayTinh> result) {
+    public void loadDataToTableSearch(ArrayList<SanPham> result) {
         try {
             tblModel.setRowCount(0);
-            for (MayTinh i : result) {
+            for (SanPham i : result) {
                 if (i.getTrangThai() == 1) {
-                    String loaimay;
-                    if (LaptopDAO.getInstance().isLaptop(i.getMaMay()) == true) {
-                        loaimay = "Laptop";
-                    } else {
-                        loaimay = "PC/Case";
-                    }
                     tblModel.addRow(new Object[]{
-                        i.getMaMay(), i.getTenMay(), i.getSoLuong(), formatter.format(i.getGia()) + "đ", i.getTenCpu(), i.getRam(), i.getRom(), loaimay
+                        i.getMaSP(), i.getTenSP(), i.getSoLuong(), formatter.format(i.getGia()) + "đ"
                     });
                 }
             }
@@ -417,18 +389,18 @@ public class TonKhoForm extends javax.swing.JInternalFrame {
         }
     }
 
-    public ArrayList<MayTinh> searchFn(String luaChon, String content) {
-        ArrayList<MayTinh> result = new ArrayList<>();
+   public ArrayList<SanPham> searchFn(String luaChon, String content) {
+        ArrayList<SanPham> result = new ArrayList<>();
         SearchProduct searchPr = new SearchProduct();
         switch (luaChon) {
             case "Tất cả":
                 result = searchPr.searchTatCa(content);
                 break;
             case "Mã máy":
-                result = searchPr.searchMaMay(content);
+                result = searchPr.searchMaSP(content);
                 break;
             case "Tên máy":
-                result = searchPr.searchTenMay(content);
+                result = searchPr.searchTenSP(content);
                 break;
             case "Số lượng":
                 result = searchPr.searchSoLuong(content);
@@ -436,18 +408,7 @@ public class TonKhoForm extends javax.swing.JInternalFrame {
             case "Đơn giá":
                 result = searchPr.searchDonGia(content);
                 break;
-            case "RAM":
-                result = searchPr.searchRam(content);
-                break;
-            case "CPU":
-                result = searchPr.searchCpu(content);
-                break;
-            case "Dung lượng":
-                result = searchPr.searchDungLuong(content);
-                break;
-            case "Card màn hình":
-                result = searchPr.searchCard(content);
-                break;
+            
             case "Xuất xứ":
                 result = searchPr.searchXuatXu(content);
                 break;

@@ -15,18 +15,32 @@ public class SanPham {
     private int trangThai;
     private String phanloai;
 
-    public SanPham(String maSP, String tenSP, int soLuong, double gia, String xuatXu, int trangThai, String phanloai) {
+    public SanPham(String maSP, String tenSP, int soLuong, double gia, String xuatXu, int trangThai, String phanLoai) {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.soLuong = soLuong;
         this.gia = gia;
         this.xuatXu = xuatXu;
-        this.trangThai = trangThai;
-        this.phanloai = phanloai;
+        this.phanloai = phanLoai;
     }
 
-    public SanPham() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public SanPham(String maSP, String tenSP, double gia, String xuatXu) {
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+        this.gia = gia;
+        this.xuatXu = xuatXu;
+    }
+    
+    public SanPham(String maSP, String tenSP, int soLuong, double gia, int trangThai ){
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+        this.soLuong = soLuong;
+        this.gia = gia;
+        this.trangThai = trangThai;
+    }
+    
+    public SanPham(){
+         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public String getMaSP() {

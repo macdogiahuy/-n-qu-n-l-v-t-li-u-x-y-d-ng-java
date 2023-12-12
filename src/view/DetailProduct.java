@@ -4,14 +4,12 @@
  */
 package view;
 
-import dao.LaptopDAO;
-import dao.PCDAO;
+import dao.SanPhamDAO;
 import java.awt.CardLayout;
 import java.text.DecimalFormat;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import model.Laptop;
-import model.PC;
+import model.SanPham;
 
 /**
  *
@@ -29,35 +27,13 @@ public class DetailProduct extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         this.owner = (ProductForm) parent;
-        if (this.owner.checklap()) {
-            Laptop a = this.owner.getDetailLapTop();
-            txtMaSanPham.setText(a.getMaMay());
-            txtTenSanPham.setText(a.getTenMay());
+            SanPham a = this.owner.getDetailLapTop();
+            txtMaSanPham.setText(a.getMaSP());
+            txtTenSanPham.setText(a.getTenSP());
             txtDonGia.setText(formatter.format(a.getGia())+"đ");
-            txtCPU.setText(a.getTenCpu());
-            txtRAM.setText(a.getRam());
-            txtROM.setText(a.getRom());
-            txtGPU.setText(a.getCardManHinh());
             txtXuatXu.setText(a.getXuatXu());
             cbxloaisp.setSelectedIndex(0);
-            txtKichThuocMan.setText(Double.toString(a.getkichThuocMan()));
-            txtDungLuongPin.setText(a.getDungLuongPin());
             txtSoLuong.setText(Integer.toString(a.getSoLuong()));
-        } else {
-            PC a = this.owner.getDetailPC();
-            txtMaSanPham.setText(a.getMaMay());
-            txtTenSanPham.setText(a.getTenMay());
-            txtDonGia.setText(formatter.format(a.getGia())+"đ");
-            txtCPU.setText(a.getTenCpu());
-            txtRAM.setText(a.getRam());
-            txtROM.setText(a.getRom());
-            txtGPU.setText(a.getCardManHinh());
-            txtXuatXu.setText(a.getXuatXu());
-            cbxloaisp.setSelectedIndex(1);
-            txtMainBoard.setText(a.getMainBoard());
-            txtCongsuatNguon.setText(Integer.toString(a.getCongSuatNguon()) + "W");
-            txtSoLuong.setText(Integer.toString(a.getSoLuong()));
-        }
     }
     
 
@@ -295,13 +271,28 @@ public class DetailProduct extends javax.swing.JDialog {
 
     private void cbxloaispItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxloaispItemStateChanged
         // TODO add your handling code here:
-        if (cbxloaisp.getSelectedItem().equals("Laptop")) {
+        if (cbxloaisp.getSelectedItem().equals("Loại Gạch")) {
             CardLayout productCategory = (CardLayout) jPanel3.getLayout();
             productCategory.first(jPanel3);
 
         }
 
-        if (cbxloaisp.getSelectedItem().equals("PC - Lắp ráp")) {
+        if (cbxloaisp.getSelectedItem().equals("Loại Ngói")) {
+            CardLayout productCategory = (CardLayout) jPanel3.getLayout();
+            productCategory.last(jPanel3);
+        }
+        
+        if (cbxloaisp.getSelectedItem().equals("Cách Âm")) {
+            CardLayout productCategory = (CardLayout) jPanel3.getLayout();
+            productCategory.last(jPanel3);
+        }
+        
+        if (cbxloaisp.getSelectedItem().equals("Trang Trí")) {
+            CardLayout productCategory = (CardLayout) jPanel3.getLayout();
+            productCategory.last(jPanel3);
+        }
+        
+        if (cbxloaisp.getSelectedItem().equals("Nội Thất")) {
             CardLayout productCategory = (CardLayout) jPanel3.getLayout();
             productCategory.last(jPanel3);
         }

@@ -21,7 +21,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import model.ChiTietPhieu;
-import model.MayTinh;
+import model.SanPham;
 import model.NhaCungCap;
 import model.PhieuNhap;
 
@@ -36,7 +36,7 @@ public class UpdatePhieuNhap extends javax.swing.JDialog {
      */
     private DefaultTableModel tblModel;
     DecimalFormat formatter = new DecimalFormat("###,###,###");
-    private ArrayList<MayTinh> allProduct;
+    private ArrayList<SanPham> allProduct;
     private PhieuNhap phieunhap;
     private ArrayList<ChiTietPhieu> CTPhieu;
     private ArrayList<ChiTietPhieu> CTPhieuOld;
@@ -100,12 +100,12 @@ public class UpdatePhieuNhap extends javax.swing.JDialog {
         tblSanPham.setDefaultEditor(Object.class, null);
     }
 
-    private void loadDataToTableProduct(ArrayList<MayTinh> arrProd) {
+    private void loadDataToTableProduct(ArrayList<SanPham> arrProd) {
         try {
             tblModel.setRowCount(0);
             for (var i : arrProd) {
                 tblModel.addRow(new Object[]{
-                    i.getMaMay(), i.getTenMay(), i.getSoLuong(), formatter.format(i.getGia()) + "đ"
+                    i.getMaSP(), i.getTenSP(), i.getSoLuong(), formatter.format(i.getGia()) + "đ"
                 });
             }
         } catch (Exception e) {
@@ -120,9 +120,9 @@ public class UpdatePhieuNhap extends javax.swing.JDialog {
         return tt;
     }
 
-    public MayTinh findMayTinh(String maMay) {
+    public SanPham findMayTinh(String maMay) {
         for (var i : allProduct) {
-            if (maMay.equals(i.getMaMay())) {
+            if (maMay.equals(i.getMaSP())) {
                 return i;
             }
         }
@@ -131,7 +131,7 @@ public class UpdatePhieuNhap extends javax.swing.JDialog {
 
     public ChiTietPhieu findCTPhieu(String maMay) {
         for (var i : CTPhieu) {
-            if (maMay.equals(i.getMaMay())) {
+            if (maMay.equals(i.getMaSP())) {
                 return i;
             }
         }
@@ -145,7 +145,7 @@ public class UpdatePhieuNhap extends javax.swing.JDialog {
 
             for (int i = 0; i < CTPhieu.size(); i++) {
                 tblNhapHangmd.addRow(new Object[]{
-                    i + 1, CTPhieu.get(i).getMaMay(), findMayTinh(CTPhieu.get(i).getMaMay()).getTenMay(), CTPhieu.get(i).getSoLuong(), formatter.format(CTPhieu.get(i).getDonGia()) + "đ"
+                    i + 1, CTPhieu.get(i).getMaSP(), findMayTinh(CTPhieu.get(i).getMaSP()).getTenSP(), CTPhieu.get(i).getSoLuong(), formatter.format(CTPhieu.get(i).getDonGia()) + "đ"
                 });
             }
         } catch (Exception e) {
@@ -398,11 +398,11 @@ public class UpdatePhieuNhap extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Bạn chưa chọn sản phẩm để nhập hàng !","Cảnh báo", JOptionPane.WARNING_MESSAGE);
         } else {
             for (var ct : CTPhieuOld) {
-                SanPhamDAO.getInstance().updateSoLuong(ct.getMaMay(), SanPhamDAO.getInstance().selectById(ct.getMaMay()).getSoLuong() - ct.getSoLuong());
+                SanPhamDAO.getInstance().updateSoLuong(ct.getMaSP(), SanPhamDAO.getInstance().selectById(ct.getMaSP()).getSoLuong() - ct.getSoLuong());
                 System.out.println(ct.getSoLuong());
             }
             for (var ct : CTPhieu) {
-                SanPhamDAO.getInstance().updateSoLuong(ct.getMaMay(), SanPhamDAO.getInstance().selectById(ct.getMaMay()).getSoLuong() + ct.getSoLuong());
+                SanPhamDAO.getInstance().updateSoLuong(ct.getMaSP(), SanPhamDAO.getInstance().selectById(ct.getMaSP()).getSoLuong() + ct.getSoLuong());
                 System.out.println(ct.getSoLuong());
             }
             // Lay thoi gian hien tai
@@ -469,8 +469,8 @@ public class UpdatePhieuNhap extends javax.swing.JDialog {
             if (mtl != null) {
                 mtl.setSoLuong(mtl.getSoLuong() + soluong);
             } else {
-                MayTinh mt = SearchProduct.getInstance().searchId((String) tblSanPham.getValueAt(i_row, 0));
-                ChiTietPhieu ctp = new ChiTietPhieu(phieunhap.getMaPhieu(), mt.getMaMay(), soluong, mt.getGia());
+                SanPham mt = SearchProduct.getInstance().searchId((String) tblSanPham.getValueAt(i_row, 0));
+                ChiTietPhieu ctp = new ChiTietPhieu(phieunhap.getMaPhieu(), mt.getMaSP(), soluong, mt.getGia());
                 CTPhieu.add(ctp);
             }
             loadDataToTableNhapHang();
@@ -482,9 +482,9 @@ public class UpdatePhieuNhap extends javax.swing.JDialog {
         // TODO add your handling code here:
         DefaultTableModel tblsp = (DefaultTableModel) tblSanPham.getModel();
         String textSearch = txtSearch.getText().toLowerCase();
-        ArrayList<MayTinh> Mtkq = new ArrayList<>();
-        for (MayTinh i : allProduct) {
-            if (i.getMaMay().concat(i.getTenMay()).toLowerCase().contains(textSearch)) {
+        ArrayList<SanPham> Mtkq = new ArrayList<>();
+        for (SanPham i : allProduct) {
+            if (i.getMaSP().concat(i.getTenSP()).toLowerCase().contains(textSearch)) {
                 Mtkq.add(i);
             }
         }

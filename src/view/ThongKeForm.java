@@ -1282,7 +1282,7 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
             tblModelAcc.setRowCount(0);
             for (int i = 0; i < thongKe.size(); i++) {
                 tblModelAcc.addRow(new Object[]{
-                    (i + 1), thongKe.get(i).getMaMay(), thongKe.get(i).getTenMay(), thongKe.get(i).getSlNhap(), thongKe.get(i).getSlXuat()
+                    (i + 1), thongKe.get(i).getMaMay(), thongKe.get(i).getTenSP(), thongKe.get(i).getSlNhap(), thongKe.get(i).getSlXuat()
                 });
             }
             tblThongKeProduct.getColumnModel().getColumn(2).setPreferredWidth(400);
@@ -1293,7 +1293,7 @@ public class ThongKeForm extends javax.swing.JInternalFrame {
     private ArrayList<ThongKeProduct> searchTenSanPhamThongKe(ArrayList<ThongKeProduct> arr, String name) {
         ArrayList<ThongKeProduct> result = new ArrayList<>();
         for (ThongKeProduct i : arr) {
-            if (i.getMaMay().toLowerCase().contains(name.toLowerCase()) || i.getTenMay().toLowerCase().contains(name.toLowerCase())) {
+            if (i.getMaMay().toLowerCase().contains(name.toLowerCase()) || i.getTenSP().toLowerCase().contains(name.toLowerCase())) {
                 result.add(i);
             }
         }

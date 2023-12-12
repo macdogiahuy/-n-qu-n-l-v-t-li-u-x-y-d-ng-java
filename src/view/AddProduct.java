@@ -4,16 +4,13 @@
  */
 package view;
 
-import dao.LaptopDAO;
 import dao.SanPhamDAO;
-import dao.PCDAO;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import model.Laptop;
-import model.MayTinh;
-import model.PC;
+import model.PhanLoai;
+import model.SanPham;
 
 /**
  *
@@ -31,7 +28,7 @@ public class AddProduct extends javax.swing.JDialog {
         this.owner = (ProductForm) parent;
         initComponents();
         setLocationRelativeTo(null);
-        txtMaSanPham.setText(createIdLT());
+        txtMaSanPham.setText(createIdGach());
     }
 
     private AddProduct(JFrame jFrame, boolean b) {
@@ -58,10 +55,6 @@ public class AddProduct extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         laptop = new javax.swing.JPanel();
         pc = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        txtMainBoard = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        txtCongsuatNguon = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         txtXuatXu = new javax.swing.JTextField();
         btnCancel = new javax.swing.JButton();
@@ -119,34 +112,15 @@ public class AddProduct extends javax.swing.JDialog {
 
         pc.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel13.setFont(new java.awt.Font("SF Pro Display", 0, 16)); // NOI18N
-        jLabel13.setText("MainBoard");
-
-        jLabel14.setFont(new java.awt.Font("SF Pro Display", 0, 16)); // NOI18N
-        jLabel14.setText("Công suất nguồn");
-
         javax.swing.GroupLayout pcLayout = new javax.swing.GroupLayout(pc);
         pc.setLayout(pcLayout);
         pcLayout.setHorizontalGroup(
             pcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtMainBoard)
-            .addComponent(txtCongsuatNguon)
-            .addGroup(pcLayout.createSequentialGroup()
-                .addGroup(pcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 94, Short.MAX_VALUE))
+            .addGap(0, 221, Short.MAX_VALUE)
         );
         pcLayout.setVerticalGroup(
             pcLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pcLayout.createSequentialGroup()
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtMainBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtCongsuatNguon, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(0, 136, Short.MAX_VALUE)
         );
 
         jPanel3.add(pc, "card2");
@@ -300,60 +274,34 @@ public class AddProduct extends javax.swing.JDialog {
 
     private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
         // TODO add your handling code here:
-        String maMay = txtMaSanPham.getText();
-        String tenMay = txtTenSanPham.getText();
-        double dongia = 0;
-        double kichthuocman = 0;
+        String maSP = txtMaSanPham.getText();
+        String tenSP = txtTenSanPham.getText();
+        double gia = 0;
         try {
-            dongia = Double.parseDouble(txtDonGia.getText());
+            gia = Double.parseDouble(txtDonGia.getText());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đơn giá ở dạng số !");
         }
-        String cpu = txtCPU.getText();
-        String ram = txtRAM.getText();
-        String rom = txtROM.getText();
-        String gpu = txtGPU.getText();
         String xuatxu = txtXuatXu.getText();
-        int trangThai = 1;
-        if (cbxloaisp.getSelectedItem().equals("Laptop")) {
-            try {
-                kichthuocman = Double.parseDouble(txtKichThuocMan.getText());
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Vui lòng nhập kích thước màn ở dạng số !");
-            }
-            String dungluongpin = txtDungLuongPin.getText();
-            if (maMay.equals("") && tenMay.equals("") && cpu.equals("") && ram.equals("") && rom.equals("") && gpu.equals("") && xuatxu.equals("") && dungluongpin.equals("")) {
+        
+        int trangThai = 1; 
+        if(cbxloaisp.getSelectedItem().equals("Loại Gạch") && cbxloaisp.getSelectedItem().equals("Loại Ngói") && cbxloaisp.getSelectedItem().equals("Cách Âm") && cbxloaisp.getSelectedItem().equals("Trang Trí") && cbxloaisp.getSelectedItem().equals("Nội Thất") )
+        {
+          if (maSP.equals("") && tenSP.equals("") &&  xuatxu.equals("")) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin !");
             } else {
-                Laptop lp = new Laptop(kichthuocman, dungluongpin, maMay, tenMay, 0, dongia, cpu, ram, xuatxu, gpu, rom,trangThai);
+                SanPham sanpham  = new SanPham(maSP, tenSP, gia, xuatxu);
                 try {
-                    LaptopDAO.getInstance().insert(lp);
+                    SanPhamDAO.getInstance().insert(sanpham);
                     this.dispose();
                     JOptionPane.showMessageDialog(this, "Thêm sản phẩm thành công !");
                     owner.loadDataToTable();
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "Thêm sản phẩm thất bại !");
                 }
-            }
-        }
-        if (cbxloaisp.getSelectedItem().equals("PC")) {
-            String mainboard = txtMainBoard.getText();
-            int congsuatnguon = 0;
-            try {
-                congsuatnguon = Integer.parseInt(txtDonGia.getText());
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Vui lòng nhập số lượng ở dạng số !");
-            }
-            if (maMay.equals("") && tenMay.equals("") && cpu.equals("") && ram.equals("") && rom.equals("") && gpu.equals("") && xuatxu.equals("") && mainboard.equals("")) {
-                JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin !");
-            } else {
-                PC pc = new PC(mainboard, congsuatnguon, maMay, tenMay, 0, dongia, cpu, ram, xuatxu, gpu, rom,trangThai);
-                PCDAO.getInstance().insert(pc);
-                this.dispose();
-                JOptionPane.showMessageDialog(this, "Thêm sản phẩm thành công !");
-                owner.loadDataToTable();
-            }
-        }
+            }  
+        } 
+        
     }//GEN-LAST:event_btnAddProductActionPerformed
 
     private void cbxloaispPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cbxloaispPropertyChange
@@ -366,16 +314,34 @@ public class AddProduct extends javax.swing.JDialog {
 
     private void cbxloaispItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxloaispItemStateChanged
         // TODO add your handling code here:
-        if (cbxloaisp.getSelectedItem().equals("Laptop")) {
+        if (cbxloaisp.getSelectedItem().equals("Loại gạch")) {
             CardLayout productCategory = (CardLayout) jPanel3.getLayout();
             productCategory.first(jPanel3);
-            txtMaSanPham.setText(createIdLT());
+            txtMaSanPham.setText(createIdGach());
         }
 
-        if (cbxloaisp.getSelectedItem().equals("PC")) {
+        if (cbxloaisp.getSelectedItem().equals("Loại ngói")) {
             CardLayout productCategory = (CardLayout) jPanel3.getLayout();
             productCategory.last(jPanel3);
-            txtMaSanPham.setText(createIdPC());
+            txtMaSanPham.setText(createIdNgoi());
+        }
+        
+        if (cbxloaisp.getSelectedItem().equals("Cách âm")){
+            CardLayout productCategory = (CardLayout) jPanel3.getLayout();
+            productCategory.first(jPanel3);
+            txtMaSanPham.setText(createIdCachAm());
+        }
+        
+        if (cbxloaisp.getSelectedItem().equals("Trang trí")){
+            CardLayout productCategory = (CardLayout) jPanel3.getLayout();
+            productCategory.first(jPanel3);
+            txtMaSanPham.setText(createIdTrangTri());
+        }
+        
+        if (cbxloaisp.getSelectedItem().equals("Nội thất")){
+            CardLayout productCategory = (CardLayout) jPanel3.getLayout();
+            productCategory.first(jPanel3);
+            txtMaSanPham.setText(createIdNoiThat());
         }
     }//GEN-LAST:event_cbxloaispItemStateChanged
 
@@ -386,56 +352,134 @@ public class AddProduct extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    public String createIdPC() {
-        ArrayList<MayTinh> mtAll = SanPhamDAO.getInstance().selectAll();
-        ArrayList<MayTinh> pcAll = new ArrayList<MayTinh>();
-        for (MayTinh mayTinh : mtAll) {
-            if (mayTinh.getMaMay().contains("PC")) {
-                pcAll.add(mayTinh);
+    public String createIdGach() {
+        ArrayList<SanPham> spAll = SanPhamDAO.getInstance().selectAll();
+        ArrayList<SanPham> gachAll = new ArrayList<SanPham>();
+        for (SanPham sanpham : spAll) {
+            if (sanpham.getMaSP().contains("Loại gạch")) {
+                gachAll.add(sanpham);
             }
         }
-        int i = pcAll.size();
-        String check ="check";
-        while(check.length()!=0){
+        int i = gachAll.size();
+        String check = "check";
+        while(check.length() != 0 ){
             i++;
-            for (MayTinh mayTinh : pcAll) {
-                if(mayTinh.getMaMay().equals("PC"+i)){
-                    check="";
+            for (SanPham sanpham : gachAll){
+                if (sanpham.getMaSP().equals("Gach"+i)){
+                    check = "";
                 }
             }
-            if(check.length()==0){
-                check ="check";
+            if (check.length() == 0){
+                check = "check";
             } else {
                 check = "";
             }
         }
-        return "PC" + i;
+        return "Gach" + i;
     }
-
-    public String createIdLT() {
-        ArrayList<MayTinh> mtAll = SanPhamDAO.getInstance().selectAll();
-        ArrayList<MayTinh> lpAll = new ArrayList<MayTinh>();
-        for (MayTinh mayTinh : mtAll) {
-            if (mayTinh.getMaMay().contains("LP")) {
-                lpAll.add(mayTinh);
+    
+    public String createIdNgoi() {
+        ArrayList<SanPham> spAll = SanPhamDAO.getInstance().selectAll();
+        ArrayList<SanPham> ngoiAll = new ArrayList<SanPham>();
+        for (SanPham sanpham : spAll) {
+            if (sanpham.getMaSP().contains("Loại ngói")) {
+                ngoiAll.add(sanpham);
             }
         }
-        int i = lpAll.size();
-        String check ="check";
-        while(check.length()!=0){
+        int i = ngoiAll.size();
+        String check = "check";
+        while(check.length() != 0 ){
             i++;
-            for (MayTinh mayTinh : lpAll) {
-                if(mayTinh.getMaMay().equals("LP"+i)){
-                    check="";
+            for (SanPham sanpham : ngoiAll){
+                if (sanpham.getMaSP().equals("Ngoi"+i)){
+                    check = "";
                 }
             }
-            if(check.length()==0){
-                check ="check";
+            if (check.length() == 0){
+                check = "check";
             } else {
                 check = "";
             }
         }
-        return "LP" + i;
+        return "Ngoi" + i;
+    }
+    
+    public String createIdCachAm() {
+        ArrayList<SanPham> spAll = SanPhamDAO.getInstance().selectAll();
+        ArrayList<SanPham> cachAmAll = new ArrayList<SanPham>();
+        for (SanPham sanpham : spAll) {
+            if (sanpham.getMaSP().contains("Cách âm")) {
+                cachAmAll.add(sanpham);
+            }
+        }
+        int i = cachAmAll.size();
+        String check = "check";
+        while(check.length() != 0 ){
+            i++;
+            for (SanPham sanpham : cachAmAll){
+                if (sanpham.getMaSP().equals("CachAm"+i)){
+                    check = "";
+                }
+            }
+            if (check.length() == 0){
+                check = "check";
+            } else {
+                check = "";
+            }
+        }
+        return "CachAm" + i;
+    }
+    
+    public String createIdTrangTri() {
+        ArrayList<SanPham> spAll = SanPhamDAO.getInstance().selectAll();
+        ArrayList<SanPham> trangTriAll = new ArrayList<SanPham>();
+        for (SanPham sanpham : spAll) {
+            if (sanpham.getMaSP().contains("Trang trí")) {
+                trangTriAll.add(sanpham);
+            }
+        }
+        int i = trangTriAll.size();
+        String check = "check";
+        while(check.length() != 0 ){
+            i++;
+            for (SanPham sanpham : trangTriAll){
+                if (sanpham.getMaSP().equals("TrangTri"+i)){
+                    check = "";
+                }
+            }
+            if (check.length() == 0){
+                check = "check";
+            } else {
+                check = "";
+            }
+        }
+        return "TrangTri" + i;
+    }
+    
+    public String createIdNoiThat() {
+        ArrayList<SanPham> spAll = SanPhamDAO.getInstance().selectAll();
+        ArrayList<SanPham> noiThatAll = new ArrayList<SanPham>();
+        for (SanPham sanpham : spAll) {
+            if (sanpham.getMaSP().contains("Nội thất")) {
+                noiThatAll.add(sanpham);
+            }
+        }
+        int i = noiThatAll.size();
+        String check = "check";
+        while(check.length() != 0 ){
+            i++;
+            for (SanPham sanpham : noiThatAll){
+                if (sanpham.getMaSP().equals("NoiThat"+i)){
+                    check = "";
+                }
+            }
+            if (check.length() == 0){
+                check = "check";
+            } else {
+                check = "";
+            }
+        }
+        return "NoiThat" + i;
     }
 
     public static void main(String args[]) {
@@ -484,8 +528,6 @@ public class AddProduct extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbxloaisp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -495,10 +537,8 @@ public class AddProduct extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel laptop;
     private javax.swing.JPanel pc;
-    private javax.swing.JTextField txtCongsuatNguon;
     private javax.swing.JTextField txtDonGia;
     private javax.swing.JTextField txtMaSanPham;
-    private javax.swing.JTextField txtMainBoard;
     private javax.swing.JTextField txtTenSanPham;
     private javax.swing.JTextField txtXuatXu;
     // End of variables declaration//GEN-END:variables

@@ -30,7 +30,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 import model.Account;
 import model.ChiTietPhieu;
-import model.MayTinh;
+import model.SanPham;
 import model.NhaCungCap;
 import model.Phieu;
 import model.PhieuNhap;
@@ -50,7 +50,7 @@ public class NhapHangForm extends javax.swing.JInternalFrame {
      */
     private DefaultTableModel tblModel;
     DecimalFormat formatter = new DecimalFormat("###,###,###");
-    private ArrayList<MayTinh> allProduct;
+    private ArrayList<SanPham> allProduct;
     private String MaPhieu;
     private ArrayList<ChiTietPhieu> CTPhieu;
     private static final ArrayList<NhaCungCap> arrNcc = NhaCungCapDAO.getInstance().selectAll();
@@ -78,7 +78,7 @@ public class NhapHangForm extends javax.swing.JInternalFrame {
 
     public final void initTable() {
         tblModel = new DefaultTableModel();
-        String[] headerTbl = new String[]{"Mã máy", "Tên máy", "Số lượng", "Đơn giá"};
+        String[] headerTbl = new String[]{"Mã sản phẩm", "Tên sản phẩm", "Số lượng", "Đơn giá"};
         tblModel.setColumnIdentifiers(headerTbl);
         tblSanPham.setModel(tblModel);
         tblSanPham.getColumnModel().getColumn(0).setPreferredWidth(5);
@@ -89,12 +89,12 @@ public class NhapHangForm extends javax.swing.JInternalFrame {
         tblNhapHang.getColumnModel().getColumn(2).setPreferredWidth(250);
     }
 
-    private void loadDataToTableProduct(ArrayList<MayTinh> arrProd) {
+    private void loadDataToTableProduct(ArrayList<SanPham> arrProd) {
         try {
             tblModel.setRowCount(0);
             for (var i : arrProd) {
                 tblModel.addRow(new Object[]{
-                    i.getMaMay(), i.getTenMay(), i.getSoLuong(), formatter.format(i.getGia()) + "đ"
+                    i.getMaSP(), i.getTenSP(), i.getSoLuong(), formatter.format(i.getGia()) + "đ"
                 });
             }
         } catch (Exception e) {
@@ -109,9 +109,9 @@ public class NhapHangForm extends javax.swing.JInternalFrame {
         return tt;
     }
 
-    public MayTinh findMayTinh(String maMay) {
+    public SanPham findMayTinh(String maMay) {
         for (var i : allProduct) {
-            if (maMay.equals(i.getMaMay())) {
+            if (maMay.equals(i.getMaSP())) {
                 return i;
             }
         }
@@ -120,7 +120,7 @@ public class NhapHangForm extends javax.swing.JInternalFrame {
 
     public ChiTietPhieu findCTPhieu(String maMay) {
         for (var i : CTPhieu) {
-            if (maMay.equals(i.getMaMay())) {
+            if (maMay.equals(i.getMaSP())) {
                 return i;
             }
         }
@@ -135,7 +135,7 @@ public class NhapHangForm extends javax.swing.JInternalFrame {
 
             for (int i = 0; i < CTPhieu.size(); i++) {
                 tblNhapHangmd.addRow(new Object[]{
-                    i + 1, CTPhieu.get(i).getMaMay(), findMayTinh(CTPhieu.get(i).getMaMay()).getTenMay(), CTPhieu.get(i).getSoLuong(), formatter.format(CTPhieu.get(i).getDonGia()) + "đ"
+                    i + 1, CTPhieu.get(i).getMaSP(), findMayTinh(CTPhieu.get(i).getMaSP()).getTenSP(), CTPhieu.get(i).getSoLuong(), formatter.format(CTPhieu.get(i).getDonGia()) + "đ"
                 });
                 sum += CTPhieu.get(i).getDonGia() * CTPhieu.get(i).getSoLuong();
             }
@@ -411,15 +411,15 @@ public class NhapHangForm extends javax.swing.JInternalFrame {
                     SanPhamDAO mtdao = SanPhamDAO.getInstance();
                     for (var i : CTPhieu) {
                         ChiTietPhieuNhapDAO.getInstance().insert(i);
-                        mtdao.updateSoLuong(i.getMaMay(), mtdao.selectById(i.getMaMay()).getSoLuong() + i.getSoLuong());
+                        mtdao.updateSoLuong(i.getMaSP(), mtdao.selectById(i.getMaSP()).getSoLuong() + i.getSoLuong());
                     }
                     JOptionPane.showMessageDialog(this, "Nhập hàng thành công !");
                     int res = JOptionPane.showConfirmDialog(this, "Bạn có muốn xuất file pdf ?","",JOptionPane.YES_NO_OPTION);
                     if (res == JOptionPane.YES_OPTION) {
                         WritePDF writepdf = new WritePDF();
                         writepdf.writePhieuNhap(MaPhieu);
-                    }
-                    ArrayList<MayTinh> productUp = SanPhamDAO.getInstance().selectAllExist();
+                    }   
+                    ArrayList<SanPham> productUp = SanPhamDAO.getInstance().selectAllExist();
                     txtSoLuong.setText("1");
                     loadDataToTableProduct(productUp);
                     DefaultTableModel r = (DefaultTableModel) tblNhapHang.getModel();
@@ -450,8 +450,8 @@ public class NhapHangForm extends javax.swing.JInternalFrame {
                     if (mtl != null) {
                         mtl.setSoLuong(mtl.getSoLuong() + soluong);
                     } else {
-                        MayTinh mt = SearchProduct.getInstance().searchId((String) tblSanPham.getValueAt(i_row, 0));
-                        ChiTietPhieu ctp = new ChiTietPhieu(MaPhieu, mt.getMaMay(), soluong, mt.getGia());
+                        SanPham sp = SearchProduct.getInstance().searchId((String) tblSanPham.getValueAt(i_row, 0));
+                        ChiTietPhieu ctp = new ChiTietPhieu(MaPhieu, sp.getMaSP(), soluong, sp.getGia());
                         CTPhieu.add(ctp);
                     }
                     loadDataToTableNhapHang();
@@ -506,9 +506,9 @@ public class NhapHangForm extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         DefaultTableModel tblsp = (DefaultTableModel) tblSanPham.getModel();
         String textSearch = txtSearch.getText().toLowerCase();
-        ArrayList<MayTinh> Mtkq = new ArrayList<>();
-        for (MayTinh i : allProduct) {
-            if (i.getMaMay().concat(i.getTenMay()).toLowerCase().contains(textSearch)) {
+        ArrayList<SanPham> Mtkq = new ArrayList<>();
+        for (SanPham i : allProduct) {
+            if (i.getMaSP().concat(i.getTenSP()).toLowerCase().contains(textSearch)) {
                 Mtkq.add(i);
             }
         }

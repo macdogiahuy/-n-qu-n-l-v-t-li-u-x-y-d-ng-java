@@ -4,14 +4,12 @@
  */
 package view;
 
-import dao.LaptopDAO;
-import dao.PCDAO;
+import dao.SanPhamDAO;
 import java.awt.CardLayout;
 import java.text.DecimalFormat;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import model.Laptop;
-import model.PC;
+import model.SanPham;
 
 /**
  *
@@ -30,35 +28,13 @@ public class UpdateProduct extends javax.swing.JDialog {
         this.owner = (ProductForm) parent;
         initComponents();
         setLocationRelativeTo(null);
-        if (this.owner.checklap()) {
-            Laptop a = this.owner.getDetailLapTop();
-            txtMaSanPham.setText(a.getMaMay());
-            txtTenSanPham.setText(a.getTenMay());
-            txtDonGia.setText(formatterE.format(a.getGia()));
-            txtCPU.setText(a.getTenCpu());
-            txtRAM.setText(a.getRam());
-            txtROM.setText(a.getRom());
-            txtGPU.setText(a.getCardManHinh());
-            txtXuatXu.setText(a.getXuatXu());
-            cbxloaisp.setSelectedIndex(0);
-            txtKichThuocMan.setText(Double.toString(a.getkichThuocMan()));
-            txtDungLuongPin.setText(a.getDungLuongPin());
-            txtSoLuong.setText(a.getSoLuong() + "");
-        } else {
-            PC a = this.owner.getDetailPC();
-            txtMaSanPham.setText(a.getMaMay());
-            txtTenSanPham.setText(a.getTenMay());
+            SanPham a = this.owner.getDetailLapTop();
+            txtMaSanPham.setText(a.getMaSP());
+            txtTenSanPham.setText(a.getTenSP());
             txtDonGia.setText(Double.toString(a.getGia()));
-            txtCPU.setText(a.getTenCpu());
-            txtRAM.setText(a.getRam());
-            txtROM.setText(a.getRom());
-            txtGPU.setText(a.getCardManHinh());
             txtXuatXu.setText(a.getXuatXu());
             cbxloaisp.setSelectedIndex(1);
-            txtMainBoard.setText(a.getMainBoard());
-            txtCongsuatNguon.setText(Integer.toString(a.getCongSuatNguon()));
             txtSoLuong.setText(Integer.toString(a.getSoLuong()));
-        }
     }
     
     private UpdateProduct(JFrame jFrame, boolean b) {
@@ -297,8 +273,8 @@ public class UpdateProduct extends javax.swing.JDialog {
 
     private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
         // TODO add your handling code here:
-        String maMay = txtMaSanPham.getText();
-        String tenMay = txtTenSanPham.getText();
+        String maSP = txtMaSanPham.getText();
+        String tenSP = txtTenSanPham.getText();
         int soluong = 0;
         double dongia = 0;
         try {
@@ -311,25 +287,14 @@ public class UpdateProduct extends javax.swing.JDialog {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đơn giá ở dạng số !");
         }
-        String cpu = txtCPU.getText();
-        String ram = txtRAM.getText();
-        String rom = txtROM.getText();
-        String gpu = txtGPU.getText();
+        
         String xuatxu = txtXuatXu.getText();
-        if (cbxloaisp.getSelectedItem().equals("Laptop")) {
-            double kichthuocman = 0;
-            try {
-                kichthuocman = Double.parseDouble(txtKichThuocMan.getText());
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Vui lòng nhập kích thước màn ở dạng số !");
-            }
-            String dungluongpin = txtDungLuongPin.getText();
-            if (maMay.equals("") || tenMay.equals("") || cpu.equals("") || ram.equals("") || rom.equals("") || gpu.equals("") || xuatxu.equals("") || dungluongpin.equals("")) {
+            if (maSP.equals("") || tenSP.equals("") ||  xuatxu.equals("")) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin !");
             } else {
-                Laptop lp = new Laptop(kichthuocman, dungluongpin, maMay, tenMay, soluong, dongia, cpu, ram, xuatxu, gpu, rom,1);
+                SanPham sp = new SanPham(maSP, tenSP, dongia, xuatxu);
                 try {
-                    LaptopDAO.getInstance().update(lp);
+                    SanPhamDAO.getInstance().update(sp);
                     this.dispose();
                     JOptionPane.showMessageDialog(this, "Sửa sản phẩm thành công !");
                     owner.loadDataToTable();
@@ -337,26 +302,6 @@ public class UpdateProduct extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(this, "Sửa sản phẩm thất bại !");
                 }
             }
-        }
-        if (cbxloaisp.getSelectedItem().equals("PC - Lắp ráp")) {
-            String mainboard = txtMainBoard.getText();
-            int congsuatnguon = 0;
-            try {
-                congsuatnguon = Integer.parseInt(txtCongsuatNguon.getText());
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Vui lòng nhập công suất nguồn ở dạng số !");
-            }
-            if (maMay.equals("") || tenMay.equals("") || cpu.equals("") || ram.equals("") || rom.equals("") || gpu.equals("") || xuatxu.equals("") || mainboard.equals("")) {
-                JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin !");
-            } else {
-                PC pc = new PC(mainboard, congsuatnguon, maMay, tenMay, soluong, dongia, cpu, ram, xuatxu, gpu, rom,1);
-                System.out.println(pc);
-                PCDAO.getInstance().update(pc);
-                this.dispose();
-                JOptionPane.showMessageDialog(this, "Sửa sản phẩm thành công !");
-                owner.loadDataToTable();
-            }
-        }
     }//GEN-LAST:event_btnAddProductActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed

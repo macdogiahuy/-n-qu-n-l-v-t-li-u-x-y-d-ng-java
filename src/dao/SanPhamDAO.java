@@ -157,14 +157,14 @@ public class SanPhamDAO implements DAOInterface<SanPham> {
         return ketQua;
     }
     
-    public int deleteTrangThai(String maMay){
+    public int deleteTrangThai(String maSP){
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
             //String sql = "INSERT INTO MayTinh (maMay, tenMay, soLuong, tenCpu, ram, cardManHinh, gia, dungLuongPin, dungLuongPin, dungLuongPin, loaiMay, rom) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
             String sql = "UPDATE SanPham SET trangThai=0 WHERE maSP=? ";
             PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, maMay);
+            pst.setString(1, maSP);
             ketQua = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
         } catch (Exception e) {
