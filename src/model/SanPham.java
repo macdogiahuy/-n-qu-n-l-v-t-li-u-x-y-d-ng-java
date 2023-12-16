@@ -11,36 +11,23 @@ public class SanPham {
     private String tenSP;
     private int soLuong;
     private double gia;
+    private String phanLoai;
     private String xuatXu;
     private int trangThai;
-    private String phanloai;
 
-    public SanPham(String maSP, String tenSP, int soLuong, double gia, String xuatXu, int trangThai, String phanLoai) {
-        this.maSP = maSP;
-        this.tenSP = tenSP;
-        this.soLuong = soLuong;
-        this.gia = gia;
-        this.xuatXu = xuatXu;
-        this.phanloai = phanLoai;
-    }
-
-    public SanPham(String maSP, String tenSP, double gia, String xuatXu) {
-        this.maSP = maSP;
-        this.tenSP = tenSP;
-        this.gia = gia;
-        this.xuatXu = xuatXu;
-    }
     
-    public SanPham(String maSP, String tenSP, int soLuong, double gia, int trangThai ){
+    public SanPham(String maSP, String tenSP, int soLuong, double gia, String phanLoai, String xuatXu,int trangThai)
+    {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.soLuong = soLuong;
         this.gia = gia;
+        this.phanLoai = phanLoai;
+        this.xuatXu = xuatXu;
         this.trangThai = trangThai;
     }
     
     public SanPham(){
-         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public String getMaSP() {
@@ -74,6 +61,14 @@ public class SanPham {
     public void setGia(double gia) {
         this.gia = gia;
     }
+    
+    public String getPhanLoai(){
+        return phanLoai;
+    }
+    
+    public void setPhanLoai(String phanLoai){
+        this.phanLoai = phanLoai;
+    }
 
     public String getXuatXu() {
         return xuatXu;
@@ -91,14 +86,6 @@ public class SanPham {
         this.trangThai = trangThai;
     }
 
-    public String getPhanloai() {
-        return phanloai;
-    }
-
-    public void setPhanloai(String phanloai) {
-        this.phanloai = phanloai;
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -107,8 +94,8 @@ public class SanPham {
         hash = 41 * hash + this.soLuong;
         hash = 41 * hash + (int) (Double.doubleToLongBits(this.gia) ^ (Double.doubleToLongBits(this.gia) >>> 32));
         hash = 41 * hash + Objects.hashCode(this.xuatXu);
+        hash = 41 * hash + (phanLoai != null ? phanLoai.hashCode() : 0);
         hash = 41 * hash + this.trangThai;
-        hash = 41 * hash + Objects.hashCode(this.phanloai);
         return hash;
     }
 
@@ -139,9 +126,10 @@ public class SanPham {
         if (!Objects.equals(this.tenSP, other.tenSP)) {
             return false;
         }
-        if (!Objects.equals(this.xuatXu, other.xuatXu)) {
+        if (!Objects.equals(this.xuatXu, other.xuatXu))
+        {
             return false;
         }
-        return Objects.equals(this.phanloai, other.phanloai);
+        return Objects.equals(this.phanLoai, other.phanLoai);
     }   
 }

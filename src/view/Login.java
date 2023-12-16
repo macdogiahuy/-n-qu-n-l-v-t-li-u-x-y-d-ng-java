@@ -104,7 +104,6 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 230, 260, -1));
 
         loginUser.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
-        loginUser.setForeground(new java.awt.Color(255, 255, 255));
         loginUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         loginUser.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -126,7 +125,6 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(loginUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, 260, 30));
 
-        passwordUser.setForeground(new java.awt.Color(255, 255, 255));
         passwordUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         passwordUser.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

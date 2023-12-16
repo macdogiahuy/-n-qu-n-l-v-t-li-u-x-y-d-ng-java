@@ -30,6 +30,7 @@ public class AddAccount extends javax.swing.JDialog {
     AddAccount() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -182,10 +183,11 @@ public class AddAccount extends javax.swing.JDialog {
         String password = BCrypt.hashpw(txtpassword.getText(), BCrypt.gensalt(12));
         String role = vaitro.getSelectedItem().toString();
         String email = txtEmail.getText();
+
         if (fullName.equals("") || user.equals("") || password.equals("") || role.equals("") || email.equals("")) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin !", "Cảnh báo ", JOptionPane.WARNING_MESSAGE);
         } else {
-            if (AccountDAO.getInstance().selectById(user) != null) {
+            if (AccountDAO.getInstance().selectById(user) == null) { // Check if account does not exist
                 if (isValid(email)) {
                     Account acc = new Account(fullName, user, password, role, 1, email);
                     AccountDAO.getInstance().insert(acc);
@@ -198,7 +200,7 @@ public class AddAccount extends javax.swing.JDialog {
             } else {
                 JOptionPane.showMessageDialog(this, "Tên đăng nhập đã tồn tại !", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             }
-        }
+    }
 
     }//GEN-LAST:event_jButton1MouseClicked
 

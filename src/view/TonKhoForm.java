@@ -53,14 +53,15 @@ public class TonKhoForm extends javax.swing.JInternalFrame {
 
     public final void initTable() {
         tblModel = new DefaultTableModel();
-        String[] headerTbl = new String[]{"Mã máy", "Tên máy", "Số lượng", "Đơn giá", "Bộ xử lí", "RAM", "Bộ nhớ", "Loại máy"};
+        String[] headerTbl = new String[]{"Mã sản phẩm", "Tên sản phẩm", "Số lượng", "Đơn giá", "Phân loại"};
         tblModel.setColumnIdentifiers(headerTbl);
         tblSanPham.setModel(tblModel);
         tblSanPham.getColumnModel().getColumn(0).setPreferredWidth(5);
         tblSanPham.getColumnModel().getColumn(1).setPreferredWidth(200);
         tblSanPham.getColumnModel().getColumn(2).setPreferredWidth(5);
-        tblSanPham.getColumnModel().getColumn(5).setPreferredWidth(5);
-        tblSanPham.getColumnModel().getColumn(6).setPreferredWidth(5);
+        tblSanPham.getColumnModel().getColumn(3).setPreferredWidth(5);
+        tblSanPham.getColumnModel().getColumn(4).setPreferredWidth(5);
+        //tblSanPham.getColumnModel().getColumn(5).setPreferredWidth(5);
     }
 
     public void loadDataToTable() {
@@ -71,7 +72,7 @@ public class TonKhoForm extends javax.swing.JInternalFrame {
             for (SanPham i : armt) {
                 if (i.getTrangThai() == 1) {
                     tblModel.addRow(new Object[]{
-                        i.getMaSP(), i.getTenSP(), i.getSoLuong(), formatter.format(i.getGia()) + "đ"
+                        i.getMaSP(), i.getTenSP(), i.getSoLuong(), formatter.format(i.getGia()) + "đ",i.getPhanLoai()
                     });
                 }
             }

@@ -9,6 +9,7 @@ import java.awt.CardLayout;
 import java.text.DecimalFormat;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import model.PhanLoai;
 import model.SanPham;
 
 /**
@@ -276,23 +277,24 @@ public class UpdateProduct extends javax.swing.JDialog {
         String maSP = txtMaSanPham.getText();
         String tenSP = txtTenSanPham.getText();
         int soluong = 0;
-        double dongia = 0;
+        int trangThai = 1;
+        int dongia = 0;
         try {
             soluong = Integer.parseInt(txtSoLuong.getText());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập số lượng ở dạng số !");
         }
         try {
-            dongia = Double.parseDouble(txtDonGia.getText());
+            dongia = Integer.parseInt(txtDonGia.getText());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đơn giá ở dạng số !");
         }
-        
+        String phanLoai = (String) cbxloaisp.getSelectedItem();
         String xuatxu = txtXuatXu.getText();
             if (maSP.equals("") || tenSP.equals("") ||  xuatxu.equals("")) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin !");
             } else {
-                SanPham sp = new SanPham(maSP, tenSP, dongia, xuatxu);
+                SanPham sp = new SanPham(maSP, tenSP, soluong, dongia, phanLoai, xuatxu, trangThai);
                 try {
                     SanPhamDAO.getInstance().update(sp);
                     this.dispose();

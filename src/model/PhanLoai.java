@@ -17,8 +17,8 @@ public class PhanLoai extends SanPham{
     private String TrangTri;
     private String NoiThat;
 
-    public PhanLoai(String LoaiGach, String LoaiNgoi, String CachAm, String TrangTri, String NoiThat, String maSP, String tenSP, int soLuong, double gia, String xuatXu, int trangThai, String phanloai) {
-        super(maSP, tenSP, soLuong, gia, xuatXu, trangThai, phanloai);
+    public PhanLoai(String LoaiGach, String LoaiNgoi, String CachAm, String TrangTri, String NoiThat, String maSP, String tenSP, int soLuong, double gia, String phanLoai, String xuatXu, int trangThai) {
+        super(maSP, tenSP, soLuong, gia, phanLoai, xuatXu, trangThai);
         this.LoaiGach = LoaiGach;
         this.LoaiNgoi = LoaiNgoi;
         this.CachAm = CachAm;

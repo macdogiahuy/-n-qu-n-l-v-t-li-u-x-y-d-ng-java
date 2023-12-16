@@ -66,16 +66,16 @@ public class ProductForm extends javax.swing.JInternalFrame {
         }
     }
 
-    public final void initTable() {
+   public final void initTable() {
         tblModel = new DefaultTableModel();
-        String[] headerTbl = new String[]{"Mã Sản Phẩm", "Tên Sản Phẩm", "Số lượng", "Đơn giá"};
+        String[] headerTbl = new String[]{"Mã Sản Phẩm", "Tên Sản Phẩm", "Số lượng", "Đơn giá", "Xuất Xứ"};
         tblModel.setColumnIdentifiers(headerTbl);
         tblSanPham.setModel(tblModel);
         tblSanPham.getColumnModel().getColumn(0).setPreferredWidth(5);
         tblSanPham.getColumnModel().getColumn(1).setPreferredWidth(200);
         tblSanPham.getColumnModel().getColumn(2).setPreferredWidth(5);
-        tblSanPham.getColumnModel().getColumn(5).setPreferredWidth(5);
-        tblSanPham.getColumnModel().getColumn(6).setPreferredWidth(5);
+        tblSanPham.getColumnModel().getColumn(3).setPreferredWidth(5);   
+        tblSanPham.getColumnModel().getColumn(4).setPreferredWidth(5);
     }
 
     public void loadDataToTable() {
@@ -86,7 +86,7 @@ public class ProductForm extends javax.swing.JInternalFrame {
             for (SanPham i : armt) {
                 if (i.getTrangThai() == 1) {                   
                     tblModel.addRow(new Object[]{
-                        i.getMaSP(), i.getTenSP(), i.getSoLuong(), formatter.format(i.getGia()) + "đ"
+                        i.getMaSP(), i.getTenSP(), i.getSoLuong(), formatter.format(i.getGia()) + "đ", i.getXuatXu()
                     });
                 }
             }
@@ -209,7 +209,7 @@ public class ProductForm extends javax.swing.JInternalFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm"));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBoxLuaChon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Mã máy", "Tên máy", "Số lượng", "Đơn giá", "RAM", "CPU", "Dung lượng", "Card màn hình", "Xuất xứ", "Đã xóa" }));
+        jComboBoxLuaChon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Mã sản phẩm", "Tên sản phẩm", "Số lượng", "Đơn giá", "Xuất xứ", "Đã xóa" }));
         jComboBoxLuaChon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxLuaChonActionPerformed(evt);
@@ -374,7 +374,9 @@ public class ProductForm extends javax.swing.JInternalFrame {
                     int viTri = giaFomat.length() - 1;
                     String giaoke = giaFomat.substring(0, viTri) + giaFomat.substring(viTri + 1);
                     double gia = Double.parseDouble(giaoke);
-                    SanPham sp = new SanPham(maSP, tenSP, soLuong, gia, 1);
+                    String xuatXu = excelRow.getCell(4).getStringCellValue();
+                    String phanLoai = excelRow.getCell(5).getStringCellValue();
+                    SanPham sp = new SanPham(maSP, tenSP, soLuong, gia, phanLoai, xuatXu, 1);
                     listAccExcel.add(sp);
                     DefaultTableModel table_acc = (DefaultTableModel) tblSanPham.getModel();
                     table_acc.setRowCount(0);
@@ -388,7 +390,7 @@ public class ProductForm extends javax.swing.JInternalFrame {
         }
         for (int i = 0; i < listAccExcel.size(); i++) {
             SanPham sanPham = listAccExcel.get(i);
-            SanPham spnew = new SanPham(sanPham.getMaSP(), sanPham.getTenSP(), sanPham.getSoLuong(), sanPham.getGia(), sanPham.getXuatXu(), sanPham.getTrangThai(), sanPham.getPhanloai());
+            SanPham spnew = new SanPham(sanPham.getMaSP(), sanPham.getTenSP(), sanPham.getSoLuong(), sanPham.getGia(), sanPham.getPhanLoai(), sanPham.getXuatXu(), sanPham.getTrangThai());
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -493,7 +495,7 @@ public class ProductForm extends javax.swing.JInternalFrame {
             tblModel.setRowCount(0);
             for (SanPham i : result) {
                 tblModel.addRow(new Object[]{
-                    i.getMaSP(), i.getTenSP(), i.getSoLuong(), formatter.format(i.getGia()) + "đ"
+                    i.getMaSP(), i.getTenSP(), i.getSoLuong(), formatter.format(i.getGia()) + "đ", i.getXuatXu()
                 });
             }
         } catch (Exception e) {

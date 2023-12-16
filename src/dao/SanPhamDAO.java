@@ -13,8 +13,6 @@ import database.JDBCUtil;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Account;
-import model.PhanLoai;
 import model.SanPham;
 
 public class SanPhamDAO implements DAOInterface<SanPham> {
@@ -28,15 +26,18 @@ public class SanPhamDAO implements DAOInterface<SanPham> {
        int ketqua=0;
        try {
            Connection con = JDBCUtil.getConnection();
-           String sql = "INSERT SanPham (maSP,tenSP,soLuong,gia,phanLoai,xuatXu,trangThai) VALUES (?,?,?,?,?,?,?)";
+           String sql = "INSERT sanpham (maSP,tenSP,soLuong,gia,phanLoai,xuatXu,trangThai) VALUES (?,?,?,?,?,?,?)";
            PreparedStatement pst = con.prepareStatement(sql);
            pst.setString(1,t.getMaSP());
            pst.setString(2,t.getTenSP());
            pst.setInt(3,t.getSoLuong());
            pst.setDouble(4, t.getGia());
-           pst.setString(5, t.getPhanloai());
-            pst.setString(6, t.getXuatXu());
-             pst.setInt(7, t.getTrangThai());
+           pst.setString(5, t.getPhanLoai());
+           pst.setString(6, t.getXuatXu());
+           pst.setInt(7, t.getTrangThai());
+           ketqua = pst.executeUpdate();
+           pst.close();
+           con.close();
        } catch (Exception e) {
             e.printStackTrace();
        }
@@ -49,17 +50,17 @@ public class SanPhamDAO implements DAOInterface<SanPham> {
         int ketqua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "UPDATE SanPham SET tenSP = ?,soLuong=?,gia=?,phanLoai=?,xuatXu=?,trangThai=? WHERE maSP=?";
+            String sql = "UPDATE sanpham SET tenSP = ?,soLuong=?,gia=?,xuatXu=?,trangThai=? WHERE maSP=?";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, t.getTenSP());
             pst.setInt(2, t.getSoLuong());
             pst.setDouble(3, t.getGia());
-            pst.setString(4, t.getPhanloai());
-            pst.setString(5, t.getXuatXu());
-            pst.setInt(6, t.getTrangThai());
-            pst.setString(7, t.getMaSP());
-            ketqua = pst.executeUpdate(sql);
-            JDBCUtil.closeConnection(con);
+            pst.setString(4, t.getXuatXu());
+            pst.setInt(5, t.getTrangThai());
+            pst.setString(6, t.getMaSP());
+            ketqua = pst.executeUpdate();
+            pst.close();
+            con.close();
         } catch (SQLException ex) {
             Logger.getLogger(SanPhamDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -96,11 +97,11 @@ public class SanPhamDAO implements DAOInterface<SanPham> {
                 String maSP = rs.getString("maSP");
                 String tenSP = rs.getString("tenSP");
                 int soLuong = rs.getInt("soLuong");
-                double gia = rs.getDouble("gia");             
+                double gia = rs.getDouble("gia"); 
+                String phanLoai = rs.getString("phanLoai");
                 String xuatXu = rs.getString("xuatXu");                     
                 int trangThai = rs.getInt("trangThai");
-                String phanLoai = rs.getString("phanLoai");
-                SanPham sp = new SanPham(maSP, tenSP, soLuong, gia, xuatXu, trangThai,phanLoai);
+                SanPham sp = new SanPham(maSP, tenSP, soLuong, gia, phanLoai, xuatXu, trangThai);
                 ketQua.add(sp);
             }
             JDBCUtil.closeConnection(con);
@@ -127,10 +128,10 @@ public class SanPhamDAO implements DAOInterface<SanPham> {
                 String tenSP = rs.getString("tenSP");
                 int soLuong = rs.getInt("soLuong");
                 double gia = rs.getDouble("gia");
-                 String phanLoai = rs.getString("phanLoai");
+                String phanLoai = rs.getString("phanLoai");
                 String xuatXu = rs.getString("xuatXu");
                 int trangThai = rs.getInt("trangThai");
-                ketQua = new SanPham(maSP, tenSP, soLuong, gia, xuatXu, trangThai,phanLoai);
+                ketQua = new SanPham(maSP, tenSP, soLuong, gia, phanLoai, xuatXu, trangThai);
             }
             JDBCUtil.closeConnection(con);
         } catch (Exception e) {
@@ -140,15 +141,15 @@ public class SanPhamDAO implements DAOInterface<SanPham> {
         return ketQua;
     }
 
-    public int updateSoLuong(String maMay, int soluong) {
+    public int updateSoLuong(String maSP, int soluong) {
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
             //String sql = "INSERT INTO MayTinh (maMay, tenMay, soLuong, tenCpu, ram, cardManHinh, gia, dungLuongPin, dungLuongPin, dungLuongPin, loaiMay, rom) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-            String sql = "UPDATE SanPham SET soLuong=? WHERE maSP=? ";
+            String sql = "UPDATE sanpham SET soLuong=? WHERE maSP=? ";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setInt(1, soluong);
-            pst.setString(2, maMay);
+            pst.setString(2, maSP);
             ketQua = pst.executeUpdate();
             JDBCUtil.closeConnection(con);
         } catch (Exception e) {
@@ -162,7 +163,7 @@ public class SanPhamDAO implements DAOInterface<SanPham> {
         try {
             Connection con = JDBCUtil.getConnection();
             //String sql = "INSERT INTO MayTinh (maMay, tenMay, soLuong, tenCpu, ram, cardManHinh, gia, dungLuongPin, dungLuongPin, dungLuongPin, loaiMay, rom) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-            String sql = "UPDATE SanPham SET trangThai=0 WHERE maSP=? ";
+            String sql = "UPDATE sanpham SET trangThai=0 WHERE maSP=? ";
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, maSP);
             ketQua = pst.executeUpdate();
@@ -186,10 +187,10 @@ public class SanPhamDAO implements DAOInterface<SanPham> {
                 String tenSP = rs.getString("tenSP");
                 int soLuong = rs.getInt("soLuong");
                 double gia = rs.getDouble("gia");
-                 String phanLoai = rs.getString("phanLoai");
+                String phanLoai = rs.getString("phanLoai");
                 String xuatXu = rs.getString("xuatXu");
                 int trangThai = rs.getInt("trangThai");
-                SanPham sp = new SanPham(maSP, tenSP, soLuong, gia, xuatXu, trangThai,phanLoai);
+                SanPham sp = new SanPham(maSP, tenSP, soLuong, gia, phanLoai, xuatXu, trangThai);
                 ketQua.add(sp);
             }
             for (SanPham sanpham : ketQua) {
@@ -217,10 +218,10 @@ public class SanPhamDAO implements DAOInterface<SanPham> {
                 String tenSP = rs.getString("tenSP");
                 int soLuong = rs.getInt("soLuong");
                 double gia = rs.getDouble("gia");
-                 String phanLoai = rs.getString("phanLoai");
+                String phanLoai = rs.getString("phanLoai");
                 String xuatXu = rs.getString("xuatXu");
                 int trangThai = rs.getInt("trangThai");
-                 SanPham sp = new SanPham(maSP, tenSP, soLuong, gia, xuatXu, trangThai,phanLoai);
+                 SanPham sp = new SanPham(maSP, tenSP, soLuong, gia, phanLoai, xuatXu, trangThai);
                 ketQua.add(sp);
             }
             JDBCUtil.closeConnection(con);
@@ -235,7 +236,7 @@ public class SanPhamDAO implements DAOInterface<SanPham> {
         int soluong = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "SELECT * FROM MayTinh WHERE trangThai = 1";
+            String sql = "SELECT * FROM sanpham WHERE trangThai = 1";
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {

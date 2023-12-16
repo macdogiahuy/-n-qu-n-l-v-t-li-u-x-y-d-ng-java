@@ -441,34 +441,40 @@ public class XuatHangForm extends javax.swing.JInternalFrame {
             } else {
                 int soluong;
                 try {
-                    soluong = Integer.parseInt(txtSoLuong.getText().trim());
-                    if (soluong > 0) {
-                        if (soluongselect < soluong) {
-                            JOptionPane.showMessageDialog(this, "Số lượng không đủ !");
-                        } else {
-                            ChiTietPhieu mtl = findCTPhieu((String) tblSanPham.getValueAt(i_row, 0));
-                            if (mtl != null) {
-                                if (findMayTinh((String) tblSanPham.getValueAt(i_row, 0)).getSoLuong() < mtl.getSoLuong() + soluong) {
-                                    JOptionPane.showMessageDialog(this, "Số lượng máy không đủ !");
-                                } else {
-                                    mtl.setSoLuong(mtl.getSoLuong() + soluong);
-                                }
+                    String inputText = txtSoLuong.getText().trim();
+                    if (!inputText.isEmpty()) {
+                        soluong = Integer.parseInt(inputText);
+                        if (soluong > 0) {
+                            if (soluongselect < soluong) {
+                                JOptionPane.showMessageDialog(this, "Số lượng không đủ !");
                             } else {
-                                SanPham sp = SearchProduct.getInstance().searchId((String) tblSanPham.getValueAt(i_row, 0));
-                                ChiTietPhieu ctp = new ChiTietPhieu(MaPhieu, sp.getMaSP(), soluong, sp.getGia());
-                                CTPhieu.add(ctp);
+                                ChiTietPhieu mtl = findCTPhieu((String) tblSanPham.getValueAt(i_row, 0));
+                                if (mtl != null) {
+                                    if (findMayTinh((String) tblSanPham.getValueAt(i_row, 0)).getSoLuong() < mtl.getSoLuong() + soluong) {
+                                        JOptionPane.showMessageDialog(this, "Số lượng sản phẩm không đủ !");
+                                    } else {
+                                        mtl.setSoLuong(mtl.getSoLuong() + soluong);
+                                    }
+                                } else {
+                                    SanPham sp = SearchProduct.getInstance().searchId((String) tblSanPham.getValueAt(i_row, 0));
+                                    ChiTietPhieu ctp = new ChiTietPhieu(MaPhieu, sp.getMaSP(), soluong, sp.getGia());
+                                    CTPhieu.add(ctp);
+                                }
+                                loadDataToTableNhapHang();
+                                textTongTien.setText(formatter.format(tinhTongTien()) + "đ");
                             }
-                            loadDataToTableNhapHang();
-                            textTongTien.setText(formatter.format(tinhTongTien()) + "đ");
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Vui lòng nhập số lượng lớn hơn 0");
                         }
                     } else {
-                        JOptionPane.showMessageDialog(this, "Vui lòng nhập số lượng lớn hơn 0");
+                        JOptionPane.showMessageDialog(this, "Vui lòng nhập số lượng!");
                     }
-                } catch (Exception e) {
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
                     JOptionPane.showMessageDialog(this, "Vui lòng nhập số lượng ở dạng số nguyên!");
                 }
             }
-        }
+    }
     }//GEN-LAST:event_addProductActionPerformed
 
     private void deleteProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteProductActionPerformed
