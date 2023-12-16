@@ -1,5 +1,5 @@
 <!-- author: macdogiahuy -->
-# Quản lý kho hàng máy tính
+# Quản lý vật liệu xây dựng
 Đồ án môn Lập trình hướng đối tượng sử dụng Java Swing + MySQL
 ## Getting Started
 
