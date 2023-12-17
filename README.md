@@ -19,5 +19,5 @@
 ### Tài khoản NHÂN VIÊN XUẤT NHẬP KHO
 - Tài khoản: trandat
 - Mật khẩu: 123456
--Tài Khoản: giahuy
+- Tài Khoản: giahuy
 - Mật khẩu: 123456
